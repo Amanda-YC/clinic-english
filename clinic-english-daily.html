@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>诊室英语 · 每日一课</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap');
+
+:root{
+  --paper:#F6F4EF;
+  --ink:#1C2B36;
+  --slate:#2F6079;
+  --slate-deep:#234A5E;
+  --slate-soft:#E4EDF1;
+  --coral:#DC6B4C;
+  --coral-soft:#F7E4DC;
+  --sage:#5E8C71;
+  --sage-soft:#E3EDE5;
+  --muted:#6E7B85;
+  --line:#E5E0D6;
+  --card:#FFFFFF;
+  --display:'Fraunces', Georgia, 'Songti SC', serif;
+  --sans:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+         'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html,body{background:var(--paper);color:var(--ink);font-family:var(--sans);
+  font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;}
+body{max-width:560px;margin:0 auto;min-height:100vh;padding-bottom:88px;position:relative;}
+
+/* ---------- Header ---------- */
+header{padding:22px 22px 14px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
+.brand .kicker{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--slate);
+  font-weight:600;}
+.brand h1{font-family:var(--display);font-weight:500;font-size:26px;line-height:1.1;margin-top:3px;
+  color:var(--ink);letter-spacing:-.01em;}
+.brand .sub{font-size:12.5px;color:var(--muted);margin-top:3px;}
+.streak{flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:var(--coral-soft);border:1px solid #EED2C7;border-radius:16px;padding:9px 14px;min-width:66px;}
+.streak .flame{font-size:18px;line-height:1;}
+.streak .num{font-family:var(--display);font-weight:600;font-size:22px;color:var(--coral);line-height:1;margin-top:1px;}
+.streak .lab{font-size:10px;color:#B5664C;letter-spacing:.05em;margin-top:2px;}
+
+/* ---------- Tabs ---------- */
+nav{display:flex;gap:6px;padding:0 22px 4px;}
+nav button{flex:1;border:none;background:transparent;font-family:var(--sans);font-size:14px;
+  font-weight:600;color:var(--muted);padding:10px 0 12px;cursor:pointer;position:relative;
+  border-radius:8px;transition:color .18s;}
+nav button .en{display:block;font-size:9.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  opacity:.6;margin-top:1px;}
+nav button[aria-selected="true"]{color:var(--slate);}
+nav button[aria-selected="true"]::after{content:"";position:absolute;left:50%;transform:translateX(-50%);
+  bottom:2px;width:26px;height:3px;border-radius:2px;background:var(--coral);}
+nav button:focus-visible{outline:2px solid var(--slate);outline-offset:2px;}
+
+main{padding:8px 22px 0;}
+.hidden{display:none !important;}
+
+/* ---------- Consultation ribbon ---------- */
+.ribbon{display:flex;gap:5px;margin:10px 0 18px;}
+.ribbon .seg{flex:1;height:5px;border-radius:3px;background:var(--line);transition:background .3s;}
+.ribbon .seg.done{background:var(--slate-soft);}
+.ribbon .seg.active{background:var(--coral);}
+
+/* ---------- Day meta ---------- */
+.daymeta{display:flex;align-items:baseline;gap:10px;margin-bottom:4px;}
+.daymeta .dn{font-family:var(--display);font-weight:600;font-size:14px;color:var(--coral);
+  letter-spacing:.04em;}
+.daymeta .stage{font-size:11px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;font-weight:600;}
+.scene-title{font-family:var(--display);font-weight:500;font-size:23px;line-height:1.2;margin-bottom:2px;}
+.scene-title .zh{font-family:var(--sans);font-weight:600;}
+.scene-en{font-size:13px;color:var(--slate);font-style:italic;font-family:var(--display);margin-bottom:12px;}
+.scene-ctx{background:var(--slate-soft);border-radius:14px;padding:13px 15px;font-size:13.5px;
+  color:var(--slate-deep);line-height:1.6;margin-bottom:22px;}
+.scene-ctx b{font-weight:600;}
+
+/* ---------- Phrase card ---------- */
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:17px 18px;
+  margin-bottom:13px;box-shadow:0 1px 2px rgba(28,43,54,.04);}
+.card .en{font-family:var(--display);font-weight:500;font-size:19px;line-height:1.35;
+  color:var(--ink);letter-spacing:-.005em;}
+.card .zh{font-size:14px;color:var(--slate-deep);margin-top:6px;}
+.card .tip{font-size:12.5px;color:var(--muted);margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);
+  line-height:1.55;}
+.card .tip::before{content:"提示 ";font-weight:600;color:var(--coral);}
+.card-foot{display:flex;gap:8px;margin-top:12px;}
+.audiobtn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:#fff;
+  border-radius:11px;padding:7px 12px;font-family:var(--sans);font-size:12.5px;font-weight:600;
+  color:var(--slate);cursor:pointer;transition:background .15s,border-color .15s;}
+.audiobtn.primary{background:var(--coral);color:#fff;border-color:var(--coral);}
+.audiobtn:hover{border-color:var(--slate);}
+.audiobtn.primary:hover{background:#C95E40;border-color:#C95E40;}
+.audiobtn:active{transform:translateY(1px);}
+.audiobtn.speaking{box-shadow:0 0 0 3px var(--coral-soft);}
+.audiobtn:focus-visible{outline:2px solid var(--slate);outline-offset:2px;}
+.spk-ico{width:15px;height:15px;display:inline-block;}
+
+.cta{width:100%;border:none;background:var(--slate);color:#fff;font-family:var(--sans);
+  font-size:15px;font-weight:600;padding:15px;border-radius:14px;cursor:pointer;margin:10px 0 26px;
+  transition:background .15s;display:flex;align-items:center;justify-content:center;gap:8px;}
+.cta:hover{background:var(--slate-deep);}
+.cta:active{transform:translateY(1px);}
+.cta.coral{background:var(--coral);}
+.cta.coral:hover{background:#C95E40;}
+.cta:focus-visible{outline:2px solid var(--ink);outline-offset:2px;}
+.cta.ghost{background:#fff;color:var(--slate);border:1px solid var(--line);}
+.cta.ghost:hover{background:var(--slate-soft);}
+
+/* ---------- Practice ---------- */
+.prac-top{display:flex;align-items:center;justify-content:space-between;margin:6px 0 16px;}
+.prac-top .count{font-size:13px;color:var(--muted);font-weight:600;}
+.prac-bar{height:6px;background:var(--line);border-radius:3px;flex:1;margin-left:14px;overflow:hidden;}
+.prac-bar i{display:block;height:100%;background:var(--sage);border-radius:3px;transition:width .35s ease;}
+.prompt-zh{font-size:13px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;font-weight:600;
+  margin-bottom:8px;}
+.prac-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:24px 20px;
+  box-shadow:0 1px 3px rgba(28,43,54,.05);}
+.prac-card .zh-cue{font-size:21px;font-weight:600;color:var(--ink);line-height:1.4;}
+.reveal-zone{margin-top:18px;}
+.reveal-zone .en{font-family:var(--display);font-weight:500;font-size:22px;line-height:1.35;color:var(--slate-deep);}
+.reveal-zone .tip{font-size:12.5px;color:var(--muted);margin-top:10px;line-height:1.55;}
+.tap-reveal{margin-top:20px;text-align:center;color:var(--coral);font-weight:600;font-size:14px;
+  border:1px dashed var(--coral);border-radius:14px;padding:16px;cursor:pointer;background:var(--coral-soft);}
+.tap-reveal:hover{background:#F4DACD;}
+.mic-row{display:flex;gap:8px;margin-top:16px;align-items:center;flex-wrap:wrap;}
+.micbtn{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--coral);background:#fff;
+  color:var(--coral);border-radius:12px;padding:9px 14px;font-family:var(--sans);font-size:13px;
+  font-weight:600;cursor:pointer;}
+.micbtn.rec{background:var(--coral);color:#fff;animation:pulse 1.1s infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 var(--coral-soft);}50%{box-shadow:0 0 0 7px rgba(220,107,76,.12);}}
+.mic-result{font-size:13px;margin-top:4px;width:100%;color:var(--slate-deep);}
+.mic-result .heard{color:var(--muted);font-style:italic;}
+.score-pill{display:inline-block;font-weight:700;border-radius:8px;padding:2px 9px;font-size:13px;}
+.rate-row{display:flex;gap:10px;margin-top:22px;}
+.rate-row button{flex:1;border-radius:13px;padding:13px;font-family:var(--sans);font-size:14px;
+  font-weight:600;cursor:pointer;border:1px solid;transition:transform .1s;}
+.rate-row button:active{transform:translateY(1px);}
+.rate-again{background:#fff;color:var(--muted);border-color:var(--line);}
+.rate-again:hover{border-color:var(--muted);}
+.rate-got{background:var(--sage-soft);color:var(--sage);border-color:#C6DBCB;}
+.rate-got:hover{background:#D7E7DB;}
+
+/* ---------- Done screen ---------- */
+.done{text-align:center;padding:34px 10px 20px;}
+.done .ck{width:74px;height:74px;border-radius:50%;background:var(--sage-soft);display:flex;
+  align-items:center;justify-content:center;margin:0 auto 18px;border:2px solid #C6DBCB;}
+.done h2{font-family:var(--display);font-weight:500;font-size:25px;margin-bottom:8px;}
+.done p{color:var(--muted);font-size:14px;line-height:1.6;max-width:330px;margin:0 auto 6px;}
+.done .stat-line{display:flex;justify-content:center;gap:26px;margin:22px 0 26px;}
+.done .stat-line .s{text-align:center;}
+.done .stat-line .v{font-family:var(--display);font-weight:600;font-size:26px;color:var(--coral);}
+.done .stat-line .l{font-size:11px;color:var(--muted);letter-spacing:.05em;margin-top:2px;}
+
+/* ---------- Progress ---------- */
+.stats-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:11px;margin:8px 0 24px;}
+.stat-box{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 12px;text-align:center;}
+.stat-box .v{font-family:var(--display);font-weight:600;font-size:30px;line-height:1;color:var(--slate);}
+.stat-box .l{font-size:11.5px;color:var(--muted);margin-top:6px;letter-spacing:.02em;}
+.sect-h{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+  font-weight:700;margin:6px 0 13px;}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:7px;margin-bottom:26px;}
+.cal .d{aspect-ratio:1;border-radius:7px;background:#fff;border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--muted);}
+.cal .d.on{background:var(--sage);border-color:var(--sage);color:#fff;font-weight:600;}
+.cal .d.today{border:2px solid var(--coral);}
+.stage-map{margin-bottom:26px;}
+.stage-row{display:flex;align-items:center;gap:11px;padding:9px 0;border-bottom:1px solid var(--line);}
+.stage-row:last-child{border-bottom:none;}
+.stage-row .dot{width:12px;height:12px;border-radius:50%;background:var(--line);flex-shrink:0;}
+.stage-row.seen .dot{background:var(--sage);}
+.stage-row .nm{font-size:14px;font-weight:600;flex:1;}
+.stage-row .nm .e{font-weight:400;color:var(--muted);font-size:12px;font-style:italic;font-family:var(--display);}
+.stage-row .cnt{font-size:12px;color:var(--muted);}
+.resetbtn{width:100%;background:none;border:1px solid var(--line);color:var(--muted);
+  border-radius:12px;padding:12px;font-family:var(--sans);font-size:13px;cursor:pointer;margin-bottom:14px;}
+.resetbtn:hover{border-color:var(--coral);color:var(--coral);}
+
+.foot-note{font-size:11.5px;color:var(--muted);text-align:center;line-height:1.6;padding:0 6px 18px;}
+
+.loading{text-align:center;padding:80px 20px;color:var(--muted);}
+.loading .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--slate);
+  margin:0 3px;animation:bob 1s infinite;}
+.loading .dot:nth-child(2){animation-delay:.15s;}
+.loading .dot:nth-child(3){animation-delay:.3s;}
+@keyframes bob{0%,100%{opacity:.3;transform:translateY(0);}50%{opacity:1;transform:translateY(-5px);}}
+
+.toast{position:fixed;left:50%;bottom:104px;transform:translateX(-50%) translateY(12px);
+  background:var(--ink);color:#fff;padding:11px 18px;border-radius:12px;font-size:13px;
+  opacity:0;pointer-events:none;transition:.25s;z-index:50;max-width:90%;text-align:center;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ---------- Daily tip ---------- */
+.tip-card{border:1px solid var(--line);border-radius:18px;padding:16px 17px;margin-bottom:24px;
+  background:#fff;border-left:4px solid var(--slate);}
+.tip-card.type-prov{border-left-color:var(--sage);}
+.tip-card.type-med{border-left-color:var(--slate);}
+.tip-card.type-joke{border-left-color:var(--coral);}
+.tip-card.type-poem{border-left-color:#8A6FB0;}
+.tip-card.type-read{border-left-color:#B58A2E;}
+.tc-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.tc-badge{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--muted);}
+.tc-spk{border:1px solid var(--line);background:#fff;border-radius:9px;padding:5px 8px;color:var(--slate);
+  cursor:pointer;display:inline-flex;}
+.tc-spk:hover{border-color:var(--slate);}
+.tc-en{font-family:var(--display);font-weight:500;font-size:17px;line-height:1.55;color:var(--ink);}
+.tc-zh{font-size:13.5px;color:var(--slate-deep);margin-top:8px;line-height:1.65;}
+.tc-note{font-size:12px;color:var(--muted);margin-top:9px;padding-top:9px;border-top:1px dashed var(--line);line-height:1.55;}
+
+/* ---------- Scenario picker ---------- */
+.sc-intro{font-size:14px;color:var(--slate-deep);background:var(--slate-soft);border-radius:14px;
+  padding:13px 15px;margin:8px 0 16px;line-height:1.6;}
+.sc-intro b{font-weight:600;}
+.role-toggle{display:flex;gap:10px;margin-bottom:16px;}
+.role-toggle button{flex:1;border:1px solid var(--line);background:#fff;border-radius:14px;padding:13px 8px;
+  font-family:var(--sans);font-weight:600;font-size:15px;color:var(--ink);cursor:pointer;
+  display:flex;flex-direction:column;gap:3px;align-items:center;transition:.15s;}
+.role-toggle button span{font-size:11px;font-weight:500;color:var(--muted);}
+.role-toggle button.on{border-color:var(--coral);background:var(--coral-soft);color:var(--coral);}
+.role-toggle button.on span{color:#B5664C;}
+.role-toggle button:focus-visible{outline:2px solid var(--slate);outline-offset:2px;}
+.sc-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:18px;}
+.sc-card{border:1px solid var(--line);background:#fff;border-radius:16px;padding:16px 12px;cursor:pointer;
+  display:flex;flex-direction:column;gap:4px;align-items:flex-start;transition:.15s;text-align:left;font-family:var(--sans);}
+.sc-card:hover{border-color:var(--slate);box-shadow:0 2px 8px rgba(28,43,54,.06);}
+.sc-card:focus-visible{outline:2px solid var(--slate);outline-offset:2px;}
+.sc-card .ic{font-size:22px;}
+.sc-card .t{font-weight:600;font-size:15px;color:var(--ink);}
+.sc-card .e{font-size:11.5px;color:var(--muted);font-style:italic;font-family:var(--display);}
+
+/* ---------- Conversation ---------- */
+.conv-head{display:flex;align-items:center;gap:8px;margin:6px 0 12px;}
+.conv-title{flex:1;font-weight:600;font-size:13.5px;text-align:center;color:var(--slate-deep);}
+.conv-back,.conv-end{border:1px solid var(--line);background:#fff;border-radius:10px;padding:7px 11px;
+  font-family:var(--sans);font-size:12.5px;font-weight:600;cursor:pointer;color:var(--slate);}
+.conv-end{background:var(--coral);color:#fff;border-color:var(--coral);}
+.conv-back:hover{border-color:var(--slate);}
+.conv-end:hover{background:#C95E40;}
+.persona{font-size:12.5px;background:var(--coral-soft);color:#9c4a30;border-radius:12px;padding:10px 13px;
+  margin-bottom:12px;line-height:1.6;}
+.persona b{font-weight:700;}
+.chat-stream{display:flex;flex-direction:column;gap:10px;padding-bottom:8px;min-height:140px;}
+.bubble{display:flex;align-items:flex-end;gap:6px;max-width:88%;}
+.bubble.ai{align-self:flex-start;}
+.bubble.me{align-self:flex-end;flex-direction:row-reverse;}
+.bubble .bx{padding:10px 13px;border-radius:15px;font-size:14.5px;line-height:1.5;}
+.bubble.ai .bx{background:#fff;border:1px solid var(--line);border-bottom-left-radius:5px;color:var(--ink);}
+.bubble.me .bx{background:var(--slate);color:#fff;border-bottom-right-radius:5px;}
+.bubble.err .bx{background:var(--coral-soft);color:#9c4a30;border:1px solid #EED2C7;}
+.bspk{border:none;background:none;color:var(--muted);cursor:pointer;padding:3px;flex-shrink:0;}
+.bspk:hover{color:var(--slate);}
+.bubble.typing{background:#fff;border:1px solid var(--line);border-radius:15px;
+  border-bottom-left-radius:5px;padding:12px 14px;align-self:flex-start;}
+.bubble.typing .d{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--muted);
+  margin:0 2px;animation:bob 1s infinite;}
+.bubble.typing .d:nth-child(2){animation-delay:.15s;}
+.bubble.typing .d:nth-child(3){animation-delay:.3s;}
+.coach{align-self:stretch;background:var(--sage-soft);border:1px solid #C6DBCB;border-radius:16px;
+  padding:14px 16px;margin-top:4px;}
+.coach-h{font-weight:700;font-size:13px;color:var(--sage);margin-bottom:8px;}
+.coach-b{font-size:13.5px;color:var(--slate-deep);line-height:1.7;}
+.chat-input{display:flex;gap:8px;align-items:flex-end;position:sticky;bottom:0;
+  background:var(--paper);padding:10px 0 8px;}
+.chat-input textarea{flex:1;border:1px solid var(--line);border-radius:14px;padding:11px 13px;
+  font-family:var(--sans);font-size:14.5px;resize:none;line-height:1.4;background:#fff;color:var(--ink);max-height:120px;}
+.chat-input textarea:focus{outline:none;border-color:var(--slate);}
+.ci-mic{border:1px solid var(--line);background:#fff;border-radius:13px;padding:0 12px;height:42px;
+  font-size:17px;cursor:pointer;flex-shrink:0;}
+.ci-mic.rec{background:var(--coral);border-color:var(--coral);animation:pulse 1.1s infinite;}
+.ci-send{border:none;background:var(--slate);color:#fff;border-radius:13px;padding:0 16px;height:42px;
+  font-family:var(--sans);font-weight:600;font-size:14px;cursor:pointer;flex-shrink:0;}
+.ci-send:hover{background:var(--slate-deep);}
+
+/* ---------- Knowledge ---------- */
+.know-card{border:1px solid var(--line);border-radius:18px;background:#fff;padding:18px;border-top:4px solid var(--slate);}
+.disc-badge{display:inline-block;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;
+  padding:4px 10px;border-radius:8px;}
+.disc-phys{background:var(--slate-soft);color:var(--slate-deep);}
+.disc-pharm{background:var(--coral-soft);color:#9c4a30;}
+.disc-anat{background:var(--sage-soft);color:var(--sage);}
+.know-term{font-family:var(--display);font-weight:600;font-size:21px;margin-top:12px;line-height:1.25;color:var(--ink);}
+.know-zh-term{font-size:14px;color:var(--slate-deep);margin-top:3px;font-weight:600;}
+.know-en{font-family:var(--display);font-weight:500;font-size:16px;line-height:1.55;margin-top:14px;color:var(--ink);}
+.know-note{font-size:12.5px;color:var(--muted);margin-top:11px;padding-top:11px;border-top:1px dashed var(--line);line-height:1.6;}
+.know-actions{display:flex;gap:8px;margin-top:15px;}
+.know-more{margin-top:14px;}
+
+/* ---------- Offline script (dialogue) ---------- */
+.script-card{border:1px solid var(--line);border-left:4px solid var(--coral);border-radius:16px;background:#fff;
+  padding:15px 16px;margin-bottom:16px;cursor:pointer;display:flex;align-items:center;gap:13px;transition:.15s;
+  width:100%;text-align:left;font-family:var(--sans);}
+.script-card:hover{border-color:var(--coral);box-shadow:0 2px 8px rgba(28,43,54,.06);}
+.script-card .ic{font-size:24px;flex-shrink:0;}
+.script-card .meta{flex:1;}
+.script-card .lab{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);font-weight:700;}
+.script-card .ti{font-weight:600;font-size:15px;margin-top:2px;color:var(--ink);}
+.script-card .go{color:var(--coral);font-weight:600;font-size:13px;flex-shrink:0;}
+.scr-head{display:flex;align-items:center;gap:8px;margin:6px 0 12px;}
+.scr-head .conv-title{flex:1;}
+.playall{width:100%;border:none;background:var(--coral);color:#fff;border-radius:13px;padding:13px;
+  font-family:var(--sans);font-weight:600;font-size:14px;cursor:pointer;margin-bottom:18px;}
+.playall.stop{background:var(--slate);}
+.scr-line{display:flex;gap:10px;margin-bottom:14px;align-items:flex-start;}
+.scr-line .who{flex-shrink:0;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-size:13px;font-weight:700;color:#fff;margin-top:2px;}
+.scr-line.d .who{background:var(--slate);}
+.scr-line.p .who{background:var(--coral);}
+.scr-line .lc{flex:1;}
+.scr-line .en{font-family:var(--display);font-weight:500;font-size:16px;line-height:1.45;color:var(--ink);}
+.scr-line .zh{font-size:13px;color:var(--muted);margin-top:4px;}
+.scr-line .ls{border:none;background:none;color:var(--slate);cursor:pointer;padding:3px;flex-shrink:0;}
+.scr-line .ls:hover{color:var(--coral);}
+
+@media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important;}}
+@media (max-width:380px){.brand h1{font-size:23px;}.card .en{font-size:18px;}}
+</style>
+</head>
+<body>
+
+<div id="boot" class="loading">
+  <div><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+  <p style="margin-top:14px;">正在载入学习记录…</p>
+</div>
+
+<div id="app" class="hidden">
+  <header>
+    <div class="brand">
+      <div class="kicker">Clinic English Daily</div>
+      <h1>诊室英语 · 每日一课</h1>
+      <div class="sub">每天几句，慢慢说得地道</div>
+    </div>
+    <div class="streak" id="streak">
+      <span class="flame">🔥</span>
+      <span class="num" id="streakNum">0</span>
+      <span class="lab">连续天数</span>
+    </div>
+  </header>
+
+  <nav role="tablist">
+    <button role="tab" aria-selected="true" data-view="today">今日<span class="en">Today</span></button>
+    <button role="tab" aria-selected="false" data-view="practice">跟读<span class="en">Practice</span></button>
+    <button role="tab" aria-selected="false" data-view="scenario">情景<span class="en">Scenario</span></button>
+    <button role="tab" aria-selected="false" data-view="knowledge">知识<span class="en">Knowledge</span></button>
+    <button role="tab" aria-selected="false" data-view="progress">进度<span class="en">Progress</span></button>
+  </nav>
+
+  <main>
+    <!-- TODAY -->
+    <section id="view-today">
+      <div class="ribbon" id="ribbon"></div>
+      <div class="daymeta">
+        <span class="dn" id="dayNum">第 1 天</span>
+        <span class="stage" id="stageLabel"></span>
+      </div>
+      <div class="scene-title"><span class="zh" id="sceneZh"></span></div>
+      <div class="scene-en" id="sceneEn"></div>
+      <div class="scene-ctx" id="sceneCtx"></div>
+      <div id="phraseList"></div>
+      <button class="cta coral" id="goPractice">
+        开始跟读练习
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+      <div id="todayDoneBanner"></div>
+      <div class="sect-h" style="margin-top:6px;">今日小贴士 · Daily Tip</div>
+      <div id="tipCard" class="tip-card"></div>
+    </section>
+
+    <!-- PRACTICE -->
+    <section id="view-practice" class="hidden">
+      <div id="pracBody"></div>
+    </section>
+
+    <!-- SCENARIO -->
+    <section id="view-scenario" class="hidden">
+      <div id="scenarioRoot"></div>
+    </section>
+
+    <!-- KNOWLEDGE -->
+    <section id="view-knowledge" class="hidden">
+      <div id="knowledgeRoot"></div>
+    </section>
+
+    <!-- PROGRESS -->
+    <section id="view-progress" class="hidden">
+      <div class="stats-grid">
+        <div class="stat-box"><div class="v" id="pStreak">0</div><div class="l">连续天数</div></div>
+        <div class="stat-box"><div class="v" id="pDays">0</div><div class="l">累计打卡</div></div>
+        <div class="stat-box"><div class="v" id="pPhrases">0</div><div class="l">练习短句</div></div>
+      </div>
+      <div class="sect-h">最近 30 天</div>
+      <div class="cal" id="cal"></div>
+      <div class="sect-h">就诊流程覆盖</div>
+      <div class="stage-map" id="stageMap"></div>
+      <div class="sect-h">情景对练</div>
+      <div id="scenarioStats"></div>
+      <button class="resetbtn" id="resetBtn">清空学习记录</button>
+      <p class="foot-note">记录保存在你的设备上，跨天累计。<br>建议每天固定时间练 5 分钟，效果最好。</p>
+    </section>
+  </main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* =========================================================
+   课程内容：按真实问诊动线编排，结合肝病专科
+   ========================================================= */
+const LESSONS = [
+  { stage:"问候 · Rapport", zh:"问候与建立信任", en:"Greeting & Building Rapport",
+    ctx:"就诊的<b>头30秒</b>决定患者是否愿意敞开。先自我介绍、确认称呼，再用开放式问题邀请患者说出真正的顾虑。",
+    phrases:[
+      {en:"Hello, I'm Dr. Yuan. It's nice to meet you.", zh:"您好，我是袁医生，很高兴见到您。", tip:"标准开场；nice to meet you 连读为 /naɪs tə miːt/。"},
+      {en:"What brings you in today?", zh:"您今天来看什么问题？", tip:"比 What's your problem 更自然友好，是英美医生最常用的开场问诊语。"},
+      {en:"How would you like me to address you?", zh:"您希望我怎么称呼您？", tip:"体现尊重；address 作动词读 /əˈdres/，重音在后。"},
+      {en:"Before we start, do you have any concerns you'd like to discuss?", zh:"开始之前，您有什么特别想谈的顾虑吗？", tip:"concerns 指顾虑、担心的事，比 problems 更温和。"},
+      {en:"Take your time, there's no rush.", zh:"慢慢来，不着急。", tip:"安抚紧张的患者；take your time 是高频固定表达。"},
+      {en:"I'll ask you a few questions to understand what's going on.", zh:"我会问您几个问题，以了解目前的情况。", tip:"what's going on 口语化，指发生了什么、情况如何。"}
+    ]},
+  { stage:"现病史 · HPI", zh:"主诉与现病史", en:"Chief Complaint & History",
+    ctx:"用 <b>OPQRST</b> 的思路问清症状：起病、性质、程度、诱因。让问题简短、一次只问一件事。",
+    phrases:[
+      {en:"When did this start?", zh:"这是什么时候开始的？", tip:"句尾 /t/ 要清晰，别吞音。"},
+      {en:"Can you describe the pain for me?", zh:"您能给我描述一下疼痛吗？", tip:"describe /dɪˈskraɪb/，重音在后。"},
+      {en:"On a scale of one to ten, how bad is it?", zh:"用1到10分，疼痛有多严重？", tip:"国际通用的疼痛评分问法，务必记住。"},
+      {en:"Does anything make it better or worse?", zh:"有什么能让它缓解或加重吗？", tip:"一句话同时问缓解与加重因素。"},
+      {en:"Is the pain sharp, dull, or throbbing?", zh:"疼痛是刺痛、钝痛，还是跳痛？", tip:"三个性质词分清：sharp 锐痛 / dull 钝痛 / throbbing 搏动性痛。"},
+      {en:"Has this ever happened before?", zh:"以前有过这种情况吗？", tip:"现在完成时强调既往是否发生过。"}
+    ]},
+  { stage:"既往史 · PMH", zh:"既往史、用药与过敏", en:"Past History, Meds & Allergies",
+    ctx:"系统采集背景信息：慢病、用药、过敏、手术、家族史与个人史。<b>过敏史</b>务必主动问清。",
+    phrases:[
+      {en:"Do you have any ongoing medical conditions?", zh:"您有没有正在患的慢性病？", tip:"ongoing 指持续存在、长期的。"},
+      {en:"Are you currently taking any medications?", zh:"您目前在服用什么药物吗？", tip:"medications 重音 /ˌmedɪˈkeɪʃnz/。"},
+      {en:"Do you have any allergies to medications?", zh:"您对药物有过敏吗？", tip:"allergies /ˈælədʒiz/，注意 g 发 /dʒ/ 音。"},
+      {en:"Have you had any surgeries in the past?", zh:"您以前做过手术吗？", tip:"surgeries 单复数都要会读 /ˈsɜːdʒəriz/。"},
+      {en:"Does anyone in your family have similar problems?", zh:"您家里有人有类似的问题吗？", tip:"采集家族史的标准问法。"},
+      {en:"Do you smoke or drink alcohol?", zh:"您吸烟或喝酒吗？", tip:"个人史；对肝病评估尤其重要。"}
+    ]},
+  { stage:"查体 · Exam", zh:"体格检查指令", en:"Physical Examination",
+    ctx:"查体前先<b>征得同意</b>，过程中用简单口令引导患者配合，结束时礼貌收尾。对患者用 tummy 比 abdomen 更亲切。",
+    phrases:[
+      {en:"I'm going to examine you now. Is that okay?", zh:"我现在要给您做检查，可以吗？", tip:"先征得同意，是英美临床的基本礼貌。"},
+      {en:"Could you lie down on the bed, please?", zh:"请您躺到床上好吗？", tip:"lie down 平躺；lie / lay 容易混，此处用 lie。"},
+      {en:"Take a deep breath in… and out.", zh:"深吸一口气……再呼出来。", tip:"听诊时常用，配合手势效果更好。"},
+      {en:"Let me know if this is tender.", zh:"如果这里按着疼，请告诉我。", tip:"tender 指压痛，比 painful 更专业准确。"},
+      {en:"I'm going to press on your tummy.", zh:"我要按一下您的肚子。", tip:"tummy 对患者更友好；abdomen 偏书面术语。"},
+      {en:"You can get dressed now. Thank you.", zh:"您现在可以穿好衣服了，谢谢。", tip:"get dressed 穿衣；查体后的礼貌收尾。"}
+    ]},
+  { stage:"诊断 · Diagnosis", zh:"解释诊断", en:"Explaining the Diagnosis",
+    ctx:"用<b>大白话</b>解释，先给希望再讲细节，最后用回授法（teach-back）确认患者真的听懂了。",
+    phrases:[
+      {en:"Based on your symptoms, I think it's likely a viral infection.", zh:"根据您的症状，我认为很可能是病毒感染。", tip:"likely 表示可能性较大，留有余地。"},
+      {en:"Let me explain what's happening in simple terms.", zh:"我用简单的话给您解释一下情况。", tip:"in simple terms 降低术语门槛。"},
+      {en:"This is a common condition, and it's treatable.", zh:"这是常见病，是可以治疗的。", tip:"安抚加上给予希望，缓解焦虑。"},
+      {en:"The good news is, it's not serious.", zh:"好消息是，这并不严重。", tip:"先报好消息，是沟通顺序的小技巧。"},
+      {en:"Do you have any questions so far?", zh:"到目前为止您有什么问题吗？", tip:"so far 指目前为止，随时给患者提问空间。"},
+      {en:"Could you tell me what you've understood, so I can fill any gaps?", zh:"您能复述一下听懂的部分吗？这样我好补充。", tip:"teach-back 回授法，确认理解的关键句。"}
+    ]},
+  { stage:"检验 · Tests", zh:"安排检查与化验", en:"Ordering Tests & Labs",
+    ctx:"清楚说明<b>要做什么、为什么、何时出结果、需不需要准备</b>（如空腹）。",
+    phrases:[
+      {en:"We'll need to run some blood tests.", zh:"我们需要做一些血液检查。", tip:"run tests 是固定搭配，指开展检查。"},
+      {en:"I'd like to order an ultrasound of your liver.", zh:"我想给您开一个肝脏超声。", tip:"order 在此指开检查单。"},
+      {en:"The results should be back in a few days.", zh:"结果几天后会出来。", tip:"back 在这里指出结果、返回。"},
+      {en:"This test will help us see what's going on.", zh:"这项检查能帮我们看清情况。", tip:"解释检查目的，减少患者顾虑。"},
+      {en:"You'll need to fast before the blood test.", zh:"抽血前您需要空腹。", tip:"fast 在此是动词，禁食的意思。"},
+      {en:"I'll explain the results once they're ready.", zh:"结果出来后我会给您解释。", tip:"once 引导一旦……就……。"}
+    ]},
+  { stage:"治疗 · Treatment", zh:"治疗与用药医嘱", en:"Treatment & Medication",
+    ctx:"医嘱要<b>具体可执行</b>：剂量、频次、疗程、注意事项与随访。强调依从性。",
+    phrases:[
+      {en:"I'm going to prescribe a medication for you.", zh:"我要给您开一种药。", tip:"prescribe /prɪˈskraɪb/。"},
+      {en:"Take one tablet twice a day with food.", zh:"一天两次，每次一片，随餐服用。", tip:"标准医嘱句式，记牢结构。"},
+      {en:"It's important to finish the whole course.", zh:"务必把整个疗程吃完。", tip:"course 在此指疗程。"},
+      {en:"If you notice any side effects, let me know.", zh:"如果出现任何副作用，请告诉我。", tip:"side effects 副作用。"},
+      {en:"Please don't stop the medication without telling me.", zh:"请不要在没告诉我的情况下停药。", tip:"强调用药依从性。"},
+      {en:"Let's review how you're doing in two weeks.", zh:"我们两周后复查一下情况。", tip:"review 在此指复查、回顾。"}
+    ]},
+  { stage:"共情 · Empathy", zh:"安抚与坏消息沟通", en:"Reassurance & Difficult News",
+    ctx:"先<b>命名情绪</b>再给信息，给患者陪伴与选择权。坏消息用委婉信号词缓冲。",
+    phrases:[
+      {en:"I can see this is worrying for you.", zh:"我看得出这让您很担心。", tip:"共情先行，先回应情绪。"},
+      {en:"I'm afraid I have some difficult news.", zh:"恐怕我有一些不太好的消息。", tip:"I'm afraid 委婉引出坏消息的缓冲句。"},
+      {en:"Would you like someone to be with you?", zh:"您希望有人陪着您吗？", tip:"谈坏消息前的关怀，给予支持。"},
+      {en:"We'll go through this together, step by step.", zh:"我们会一步一步一起面对。", tip:"step by step 传递陪伴感。"},
+      {en:"It's completely normal to feel this way.", zh:"有这样的感受完全正常。", tip:"正常化患者的情绪反应。"},
+      {en:"Whatever you decide, I'll support you.", zh:"无论您怎么决定，我都会支持您。", tip:"尊重患者的自主权。"}
+    ]},
+  { stage:"肝病专科 · Hepatology", zh:"肝病专科场景", en:"Hepatology Scenarios",
+    ctx:"向患者解释肝功能、乙肝与长期管理。把<b>慢病管理</b>的观念用平实语言传递出去。",
+    phrases:[
+      {en:"Your liver function tests show some inflammation.", zh:"您的肝功能检查显示有一些炎症。", tip:"liver function tests 即肝功能，缩写 LFTs。"},
+      {en:"Hepatitis B is a virus that affects the liver.", zh:"乙肝是一种影响肝脏的病毒。", tip:"hepatitis /ˌhepəˈtaɪtɪs/，重音在 tai。"},
+      {en:"With treatment, we can keep the virus under control.", zh:"通过治疗，我们可以把病毒控制住。", tip:"under control 受控、控制住。"},
+      {en:"It's important to avoid alcohol to protect your liver.", zh:"为保护肝脏，避免饮酒很重要。", tip:"生活方式指导的关键一句。"},
+      {en:"You'll need regular check-ups to monitor your liver.", zh:"您需要定期复查来监测肝脏。", tip:"monitor /ˈmɒnɪtə/ 监测；check-ups 复查。"},
+      {en:"This condition can be managed well over the long term.", zh:"这个病在长期是可以良好管理的。", tip:"传递慢病可管理的信心。"}
+    ]},
+  { stage:"发热 · Fever", zh:"发热问诊", en:"Assessing a Fever",
+    ctx:"发热问诊要问清<b>热型、起病、伴随症状与诱因</b>。寒战、盗汗、热峰是重要线索，配合接触史一起评估。",
+    phrases:[
+      {en:"How high has your temperature been?", zh:"您体温最高到多少？", tip:"temperature /ˈtemprətʃə/，三个音节别读成四个。"},
+      {en:"When did the fever start, and does it come and go?", zh:"发烧什么时候开始的？是时有时无吗？", tip:"come and go 指时起时退，描述间歇热很常用。"},
+      {en:"Have you had any chills or night sweats?", zh:"有没有寒战或盗汗？", tip:"chills 寒战；night sweats 盗汗，结核/淋巴瘤的重要线索。"},
+      {en:"Have you taken anything to bring the fever down?", zh:"您吃过退烧的东西吗？", tip:"bring down 使降低；问退热药使用情况。"},
+      {en:"Do you have a sore throat or any body aches?", zh:"有咽痛或全身酸痛吗？", tip:"body aches 全身酸痛，流感样症状的典型主诉。"},
+      {en:"Have you measured your temperature at home?", zh:"您在家量过体温吗？", tip:"measured /ˈmeʒəd/，注意 s 发 /ʒ/ 音。"}
+    ]},
+  { stage:"咳嗽 · Cough", zh:"咳嗽与呼吸道症状", en:"Cough & Respiratory",
+    ctx:"区分<b>干咳与咳痰</b>，问清痰的性状、气短与胸痛。咳血是必须追问的红旗症状。",
+    phrases:[
+      {en:"Is your cough dry, or are you bringing up phlegm?", zh:"您是干咳，还是有痰？", tip:"bring up phlegm 咳痰；phlegm 读 /flem/，g 不发音。"},
+      {en:"What colour is the phlegm?", zh:"痰是什么颜色？", tip:"痰色提示性质：黄绿提示感染，铁锈色见于肺炎链球菌。"},
+      {en:"Are you short of breath or wheezing?", zh:"您气短或有喘鸣吗？", tip:"short of breath 气短；wheezing 喘鸣，提示气道痉挛。"},
+      {en:"Does it hurt when you breathe in deeply?", zh:"深吸气时会疼吗？", tip:"breathe 是动词读 /briːð/，与名词 breath /breθ/ 不同。"},
+      {en:"Have you coughed up any blood?", zh:"有没有咳血？", tip:"cough up blood 咳血，必须主动追问的红旗症状。"},
+      {en:"How long have you had this cough?", zh:"这个咳嗽持续多久了？", tip:"超过三周需警惕，时长决定鉴别方向。"}
+    ]},
+  { stage:"腹泻 · Diarrhea", zh:"腹泻与肠道症状", en:"Diarrhea & GI",
+    ctx:"评估<b>频次、性状、脱水与流行病学线索</b>。水样或血样、能否进水、群聚发病都要问到。",
+    phrases:[
+      {en:"How many times a day are you passing stools?", zh:"您一天排便几次？", tip:"pass stools 排便，比 poop 专业、比 defecate 自然。"},
+      {en:"Is the diarrhea watery or is there any blood?", zh:"腹泻是水样的，还是带血？", tip:"watery 水样；带血提示侵袭性肠道感染。"},
+      {en:"Are you able to keep fluids down?", zh:"您喝水能喝得进、不吐吗？", tip:"keep down 留得住、不吐出来；评估补液可行性。"},
+      {en:"Do you feel dizzy when you stand up?", zh:"站起来时会头晕吗？", tip:"体位性头晕是脱水的重要床旁线索。"},
+      {en:"Have you eaten anything unusual recently?", zh:"最近吃过什么不寻常的东西吗？", tip:"排查食源性感染的关键问题。"},
+      {en:"Is anyone around you unwell as well?", zh:"您身边有别人也不舒服吗？", tip:"unwell 不舒服，比 sick 委婉；提示群聚或共同暴露。"}
+    ]},
+  { stage:"接触史 · Exposure", zh:"接触史与旅行史", en:"Exposure & Travel History",
+    ctx:"感染评估的核心拼图：<b>旅行、接触、动物暴露、家庭聚集、疫苗与返程时间</b>，用于推断暴露与潜伏期。",
+    phrases:[
+      {en:"Have you traveled anywhere recently?", zh:"您最近去过哪里旅行吗？", tip:"旅行史是输入性感染评估的第一步。"},
+      {en:"Have you been in contact with anyone who's unwell?", zh:"您接触过身体不适的人吗？", tip:"in contact with 接触过，固定搭配。"},
+      {en:"Have you been around any animals or insect bites?", zh:"您接触过动物或被昆虫叮咬吗？", tip:"评估人畜共患与虫媒传播。"},
+      {en:"Has anyone in your household had similar symptoms?", zh:"您家里有人有类似症状吗？", tip:"household 指同住家人；评估家庭聚集。"},
+      {en:"When exactly did you return from your trip?", zh:"您具体是哪天回来的？", tip:"精确返程日期用于推算潜伏期，务必问清。"},
+      {en:"Are your vaccinations up to date?", zh:"您的疫苗接种是最新的吗？", tip:"up to date 最新、未漏种；vaccinations /ˌvæksɪˈneɪʃnz/。"}
+    ]},
+  { stage:"防控 · Isolation", zh:"感染防控与隔离沟通", en:"Infection Control & Isolation",
+    ctx:"向患者解释隔离与防护时，先<b>说明原因、强调暂时性、给予安心</b>，避免让患者感到被针对或恐慌。",
+    phrases:[
+      {en:"For everyone's safety, we'll need to keep you isolated for now.", zh:"为了大家的安全，目前需要让您单独隔离。", tip:"isolated 隔离；先讲原因再讲措施，降低抵触。"},
+      {en:"I'll be wearing protective equipment — please don't be alarmed.", zh:"我会穿防护装备，请不要惊慌。", tip:"don't be alarmed 别惊慌，安抚穿防护服可能引起的不安。"},
+      {en:"Please wear this mask while you're in the clinic.", zh:"在诊室期间请戴上这个口罩。", tip:"wear a mask 戴口罩，固定搭配。"},
+      {en:"This is a precaution to protect you and others.", zh:"这是为保护您和他人的预防措施。", tip:"precaution /prɪˈkɔːʃn/ 预防措施。"},
+      {en:"The isolation is temporary, just until we have your results.", zh:"隔离是暂时的，等结果出来就好了。", tip:"temporary /ˈtemprəri/；强调暂时性最能安抚患者。"},
+      {en:"We'll make sure your family knows how to visit safely.", zh:"我们会确保您家人知道如何安全探视。", tip:"保留与家人的联系，减少隔离带来的孤立感。"}
+    ]},
+  { stage:"抗菌 · Antibiotics", zh:"抗菌药物用药指导", en:"Antibiotics & Counseling",
+    ctx:"抗菌药物宣教重点：<b>规律服用、足疗程、识别不良反应、合理使用</b>。把“防耐药”用大白话讲给患者听。",
+    phrases:[
+      {en:"These antibiotics will target the infection.", zh:"这些抗生素是针对感染的。", tip:"antibiotics /ˌæntɪbaɪˈɒtɪks/；target 在此指针对、作用于。"},
+      {en:"Take them at the same times each day.", zh:"请每天在固定时间服用。", tip:"维持稳定血药浓度，强调规律性。"},
+      {en:"Finish the full course, even if you feel better.", zh:"即使好转，也要吃完整个疗程。", tip:"防止耐药与复发的关键句，务必让患者记住。"},
+      {en:"Antibiotics won't help a viral infection.", zh:"抗生素对病毒感染没用。", tip:"合理用药宣教，纠正“一发烧就用抗生素”的误区。"},
+      {en:"Let me know if you get a rash or diarrhea.", zh:"如果出现皮疹或腹泻请告诉我。", tip:"rash 皮疹，是常见且需警惕的不良反应。"},
+      {en:"We try not to overuse antibiotics, to keep them effective.", zh:"我们尽量不滥用抗生素，好让它们保持有效。", tip:"overuse 滥用；把抗菌药物管理讲成“为你长远着想”。"}
+    ]},
+  { stage:"收尾 · Closing", zh:"总结与随访收尾", en:"Closing & Follow-up",
+    ctx:"结束前<b>总结要点</b>、给最后提问机会、约好随访，并交代加重时的安全网（safety-netting）。",
+    phrases:[
+      {en:"Let me summarize what we've discussed today.", zh:"我来总结一下我们今天谈的内容。", tip:"summarize /ˈsʌməraɪz/，收尾必备。"},
+      {en:"Is there anything else you'd like to ask?", zh:"您还有别的想问的吗？", tip:"给患者最后的提问机会。"},
+      {en:"I'd like to see you again in one month.", zh:"我想请您一个月后再来复诊。", tip:"安排 follow-up 随访。"},
+      {en:"If anything gets worse, please come back sooner.", zh:"如果情况加重，请尽早回来。", tip:"safety-netting 安全网建议，很重要。"},
+      {en:"The nurse will help you book the next appointment.", zh:"护士会帮您预约下次就诊。", tip:"book an appointment 预约就诊。"},
+      {en:"Take care, and don't hesitate to reach out.", zh:"保重，有需要随时联系。", tip:"don't hesitate 别犹豫；reach out 联系。"}
+    ]}
+];
+const N = LESSONS.length;
+
+/* =========================================================
+   状态 + 持久化
+   优先 window.storage（在 Claude 内）→ 退回 localStorage（独立文件/安卓/微信浏览器）→ 退回内存
+   ========================================================= */
+const KEY = "clinicEnglish:stats:v1";
+let stats = { startDate:null, lastCompletedDate:null, streak:0, totalDays:0, phrases:0, scenarios:0, history:[], scenarioLog:[] };
+const memStore = {};
+function localGet(k){ try{ return localStorage.getItem(k); }catch(e){ return (k in memStore)?memStore[k]:null; } }
+function localSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){ memStore[k]=v; } }
+const store = {
+  async get(k){
+    if(typeof window!=="undefined" && window.storage && window.storage.get){
+      try{ const r = await window.storage.get(k); return (r && r.value!=null) ? r.value : localGet(k); }
+      catch(e){ return localGet(k); }
+    }
+    return localGet(k);
+  },
+  async set(k,v){
+    if(typeof window!=="undefined" && window.storage && window.storage.set){
+      try{ await window.storage.set(k,v); return; }catch(e){ /* 退回本地 */ }
+    }
+    localSet(k,v);
+  }
+};
+
+function todayStr(){ const d=new Date(); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+function ymd(d){ return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+function daysBetween(a,b){ return Math.round((new Date(b)-new Date(a))/86400000); }
+
+async function loadStats(){
+  const raw = await store.get(KEY);
+  if(raw){ try{ stats = JSON.parse(raw); }catch(e){ /* 损坏则用默认 */ } }
+  if(!stats.startDate) stats.startDate = todayStr();
+  if(!Array.isArray(stats.history)) stats.history = [];
+  if(!Array.isArray(stats.scenarioLog)) stats.scenarioLog = [];
+  if(typeof stats.scenarios !== "number") stats.scenarios = 0;
+}
+async function saveStats(){ await store.set(KEY, JSON.stringify(stats)); }
+
+/* 标记今日打卡（幂等：当天首次完成才累计连续天数）。跟读完成与情景对练完成都调用 */
+async function markDailyComplete(){
+  if(completedToday()) return false;
+  const t = todayStr();
+  if(stats.lastCompletedDate && daysBetween(stats.lastCompletedDate, t) === 1) stats.streak += 1;
+  else stats.streak = 1;
+  stats.totalDays += 1;
+  stats.lastCompletedDate = t;
+  stats.history.push({ date:t, idx:(stats.totalDays-1)%N });
+  if(stats.history.length>180) stats.history = stats.history.slice(-180);
+  updateStreakBadge();
+  return true;
+}
+
+function completedToday(){ return stats.lastCompletedDate === todayStr(); }
+
+/* 今日应展示的课程序号 */
+function displayIndex(){
+  if(completedToday()) return ((stats.totalDays-1)%N + N)%N;
+  return stats.totalDays % N;
+}
+
+/* =========================================================
+   语音朗读（Web Speech API）
+   ========================================================= */
+let enVoice = null;
+function pickVoice(){
+  const vs = speechSynthesis.getVoices();
+  enVoice = vs.find(v=>/en-GB/i.test(v.lang)) || vs.find(v=>/en[-_]US/i.test(v.lang))
+         || vs.find(v=>/^en/i.test(v.lang)) || null;
+}
+if('speechSynthesis' in window){
+  pickVoice();
+  speechSynthesis.onvoiceschanged = pickVoice;
+}
+function speak(text, slow, btn){
+  if(!('speechSynthesis' in window)){ toast("此浏览器不支持语音朗读"); return; }
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = enVoice ? enVoice.lang : 'en-US';
+  if(enVoice) u.voice = enVoice;
+  u.rate = slow ? 0.65 : 0.92;
+  if(btn){ btn.classList.add('speaking'); u.onend = ()=>btn.classList.remove('speaking');
+           u.onerror = ()=>btn.classList.remove('speaking'); }
+  speechSynthesis.speak(u);
+}
+
+/* =========================================================
+   渲染：今日
+   ========================================================= */
+function spkIcon(){ return '<svg class="spk-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>'; }
+
+function renderToday(){
+  const idx = displayIndex();
+  const L = LESSONS[idx];
+  document.getElementById('dayNum').textContent = "第 " + (stats.totalDays + (completedToday()?0:1)) + " 天";
+  document.getElementById('stageLabel').textContent = L.stage;
+  document.getElementById('sceneZh').textContent = L.zh;
+  document.getElementById('sceneEn').textContent = L.en;
+  document.getElementById('sceneCtx').innerHTML = L.ctx;
+
+  // ribbon
+  const rb = document.getElementById('ribbon'); rb.innerHTML = "";
+  for(let i=0;i<N;i++){
+    const s = document.createElement('div'); s.className = "seg";
+    if(i<idx) s.classList.add('done'); if(i===idx) s.classList.add('active');
+    rb.appendChild(s);
+  }
+
+  // phrases
+  const pl = document.getElementById('phraseList'); pl.innerHTML = "";
+  L.phrases.forEach(p=>{
+    const c = document.createElement('div'); c.className="card";
+    c.innerHTML =
+      '<div class="en">'+escapeHtml(p.en)+'</div>'+
+      '<div class="zh">'+escapeHtml(p.zh)+'</div>'+
+      '<div class="tip">'+escapeHtml(p.tip)+'</div>'+
+      '<div class="card-foot">'+
+        '<button class="audiobtn primary" data-act="play">'+spkIcon()+'朗读</button>'+
+        '<button class="audiobtn" data-act="slow">慢速</button>'+
+      '</div>';
+    c.querySelector('[data-act="play"]').addEventListener('click',e=>speak(p.en,false,e.currentTarget));
+    c.querySelector('[data-act="slow"]').addEventListener('click',e=>speak(p.en,true,e.currentTarget));
+    pl.appendChild(c);
+  });
+
+  // done banner
+  const banner = document.getElementById('todayDoneBanner');
+  const cta = document.getElementById('goPractice');
+  if(completedToday()){
+    cta.textContent = "今天已打卡，再复习一遍 →";
+    cta.classList.remove('coral');
+    banner.innerHTML = '<div class="scene-ctx" style="background:var(--sage-soft);color:var(--sage);text-align:center;margin-bottom:26px;">✓ 今日已完成打卡，明天见！</div>';
+  }else{
+    cta.innerHTML = '开始跟读练习 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+    cta.classList.add('coral');
+    banner.innerHTML = "";
+  }
+}
+
+/* =========================================================
+   渲染：跟读练习
+   ========================================================= */
+let pracPhrases = [], pracPos = 0, pracRevealed = false;
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+function startPractice(){
+  pracPhrases = LESSONS[displayIndex()].phrases.slice();
+  pracPos = 0;
+  switchView('practice');
+  renderPracStep();
+}
+
+function renderPracStep(){
+  const body = document.getElementById('pracBody');
+  if(pracPos >= pracPhrases.length){ renderDone(); return; }
+  pracRevealed = false;
+  const p = pracPhrases[pracPos];
+  const pct = Math.round((pracPos)/pracPhrases.length*100);
+  body.innerHTML =
+    '<div class="prac-top"><span class="count">'+(pracPos+1)+' / '+pracPhrases.length+'</span>'+
+      '<span class="prac-bar"><i style="width:'+pct+'%"></i></span></div>'+
+    '<div class="prompt-zh">先试着说出英文</div>'+
+    '<div class="prac-card">'+
+      '<div class="zh-cue">'+escapeHtml(p.zh)+'</div>'+
+      '<div id="revealZone"></div>'+
+    '</div>';
+  const rz = document.getElementById('revealZone');
+  const tap = document.createElement('div');
+  tap.className = "tap-reveal";
+  tap.innerHTML = "👆 点击看答案并听发音";
+  tap.addEventListener('click', ()=>revealPrac(p));
+  rz.appendChild(tap);
+}
+
+function revealPrac(p){
+  if(pracRevealed) return;
+  pracRevealed = true;
+  const rz = document.getElementById('revealZone');
+  rz.innerHTML =
+    '<div class="reveal-zone">'+
+      '<div class="en">'+escapeHtml(p.en)+'</div>'+
+      '<div class="tip">'+escapeHtml(p.tip)+'</div>'+
+      '<div class="card-foot" style="margin-top:14px;">'+
+        '<button class="audiobtn primary" id="rPlay">'+spkIcon()+'朗读</button>'+
+        '<button class="audiobtn" id="rSlow">慢速</button>'+
+        (SR ? '<button class="micbtn" id="rMic">🎤 我来跟读</button>' : '')+
+      '</div>'+
+      (SR ? '<div class="mic-result" id="micRes"></div>' : '<div class="mic-result" style="color:var(--muted);">对照音频，自己跟读一遍 →</div>')+
+      '<div class="rate-row">'+
+        '<button class="rate-again" id="rAgain">再练练</button>'+
+        '<button class="rate-got" id="rGot">掌握了 ✓</button>'+
+      '</div>'+
+    '</div>';
+  speak(p.en,false,null);
+  document.getElementById('rPlay').addEventListener('click',e=>speak(p.en,false,e.currentTarget));
+  document.getElementById('rSlow').addEventListener('click',e=>speak(p.en,true,e.currentTarget));
+  if(SR) document.getElementById('rMic').addEventListener('click',e=>recognize(p.en,e.currentTarget));
+  document.getElementById('rAgain').addEventListener('click',()=>{ pracPhrases.push(p); nextPrac(); });
+  document.getElementById('rGot').addEventListener('click',nextPrac);
+}
+
+function nextPrac(){ pracPos++; renderPracStep(); }
+
+/* 语音识别跟读评分 */
+function recognize(target, btn){
+  const rec = new SR();
+  rec.lang = 'en-US'; rec.interimResults = false; rec.maxAlternatives = 1;
+  btn.classList.add('rec'); btn.textContent = "🎤 听你说…";
+  const res = document.getElementById('micRes');
+  res.textContent = "";
+  rec.onresult = (ev)=>{
+    const said = ev.results[0][0].transcript;
+    const score = similarity(said, target);
+    let color = score>=80 ? 'var(--sage)' : score>=55 ? '#C99A2E' : 'var(--coral)';
+    let bg = score>=80 ? 'var(--sage-soft)' : score>=55 ? '#F6ECD2' : 'var(--coral-soft)';
+    let word = score>=80 ? '很地道！' : score>=55 ? '不错，再清晰些' : '多练几遍';
+    res.innerHTML = '<span class="score-pill" style="color:'+color+';background:'+bg+'">'+score+'% · '+word+'</span>'+
+                    '<br><span class="heard">识别到：'+escapeHtml(said)+'</span>';
+  };
+  rec.onerror = ()=>{ res.innerHTML = '<span class="heard">没听清，请靠近麦克风再试一次。</span>'; };
+  rec.onend = ()=>{ btn.classList.remove('rec'); btn.textContent = "🎤 我来跟读"; };
+  try{ rec.start(); }catch(e){ btn.classList.remove('rec'); btn.textContent="🎤 我来跟读"; }
+}
+function norm(s){ return s.toLowerCase().replace(/[^a-z0-9\s]/g,"").replace(/\s+/g," ").trim(); }
+function similarity(a,b){
+  const wa = norm(a).split(" ").filter(Boolean), wb = norm(b).split(" ").filter(Boolean);
+  if(!wb.length) return 0;
+  const setA = {}; wa.forEach(w=>setA[w]=(setA[w]||0)+1);
+  let hit=0; wb.forEach(w=>{ if(setA[w]>0){ hit++; setA[w]--; } });
+  return Math.round(hit/wb.length*100);
+}
+
+/* =========================================================
+   完成打卡
+   ========================================================= */
+async function renderDone(){
+  const justCompleted = !completedToday();
+  if(justCompleted){
+    const idx = stats.totalDays % N;          // 本次完成的课程
+    await markDailyComplete();
+    stats.phrases += LESSONS[idx].phrases.length;
+    await saveStats();
+  }
+  const body = document.getElementById('pracBody');
+  body.innerHTML =
+    '<div class="done">'+
+      '<div class="ck"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#5E8C71" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>'+
+      '<h2>'+(justCompleted?'今日打卡完成！':'又复习了一遍 👏')+'</h2>'+
+      '<p>'+(justCompleted?'坚持就是这样一句一句攒出来的。明天还有新的就诊场景等你。':'重复是最好的老师，再听一遍发音也很值得。')+'</p>'+
+      '<div class="stat-line">'+
+        '<div class="s"><div class="v">'+stats.streak+'</div><div class="l">连续天数</div></div>'+
+        '<div class="s"><div class="v">'+stats.totalDays+'</div><div class="l">累计打卡</div></div>'+
+        '<div class="s"><div class="v">'+stats.phrases+'</div><div class="l">练习短句</div></div>'+
+      '</div>'+
+      '<button class="cta ghost" id="backToday">回到今日</button>'+
+    '</div>';
+  document.getElementById('backToday').addEventListener('click',()=>{ renderToday(); switchView('today'); });
+  if(justCompleted) toast("🔥 连续 "+stats.streak+" 天，继续保持！");
+}
+
+/* =========================================================
+   渲染：进度
+   ========================================================= */
+function renderProgress(){
+  document.getElementById('pStreak').textContent = stats.streak;
+  document.getElementById('pDays').textContent = stats.totalDays;
+  document.getElementById('pPhrases').textContent = stats.phrases;
+
+  // 30天日历
+  const cal = document.getElementById('cal'); cal.innerHTML = "";
+  const done = new Set(stats.history.map(h=>h.date));
+  const t = todayStr();
+  for(let i=29;i>=0;i--){
+    const d = new Date(); d.setDate(d.getDate()-i);
+    const ds = ymd(d);
+    const cell = document.createElement('div'); cell.className="d";
+    cell.textContent = d.getDate();
+    if(done.has(ds)) cell.classList.add('on');
+    if(ds===t) cell.classList.add('today');
+    cal.appendChild(cell);
+  }
+
+  // 流程覆盖
+  const seen = {}; stats.history.forEach(h=>{ seen[h.idx]=(seen[h.idx]||0)+1; });
+  const sm = document.getElementById('stageMap'); sm.innerHTML="";
+  LESSONS.forEach((L,i)=>{
+    const row = document.createElement('div');
+    row.className = "stage-row" + (seen[i]?" seen":"");
+    row.innerHTML = '<span class="dot"></span>'+
+      '<span class="nm">'+escapeHtml(L.zh)+' <span class="e">'+escapeHtml(L.en)+'</span></span>'+
+      '<span class="cnt">'+(seen[i]?('练 '+seen[i]+' 次'):'未开始')+'</span>';
+    sm.appendChild(row);
+  });
+
+  // 情景对练统计
+  const ss = document.getElementById('scenarioStats');
+  const cnt = stats.scenarios || 0;
+  const log = (stats.scenarioLog || []).slice().reverse().slice(0,6);
+  ss.innerHTML =
+    '<div class="stat-box" style="margin-bottom:13px;"><div class="v">'+cnt+'</div><div class="l">累计完成情景对练</div></div>'+
+    (log.length
+      ? '<div class="stage-map">'+log.map(e=>
+          '<div class="stage-row seen"><span class="dot"></span>'+
+          '<span class="nm">'+escapeHtml(e.sc)+' <span class="e">'+(e.role==='doctor'?'我当医生':'我当患者')+'</span></span>'+
+          '<span class="cnt">'+escapeHtml(String(e.date).slice(5))+'</span></div>').join('')+'</div>'
+      : '<p class="foot-note" style="text-align:left;padding:0 0 6px;">还没有情景对练记录，去「情景」标签开始第一次对话吧。</p>');
+}
+
+/* =========================================================
+   每日小贴士（原创内容 / 公共谚语，按长度递增，后程出现长文）
+   ========================================================= */
+const TIPS = [
+  { type:"prov", en:"An apple a day keeps the doctor away.",
+    zh:"一天一苹果，医生远离我。", note:"最经典的健康谚语，和患者聊饮食时能自然拉近距离。" },
+  { type:"med", en:"A symptom is what the patient feels; a sign is what you find.",
+    zh:"症状是患者的感受，体征是你查见的。", note:"symptom 主观（如恶心），sign 客观（如黄疸），英文病历区分严格。" },
+  { type:"prov", en:"Prevention is better than cure.",
+    zh:"预防胜于治疗。", note:"慢病管理与公共卫生沟通的万能金句。" },
+  { type:"joke", en:"Why did the white blood cell feel lonely? It had no red friends around.",
+    zh:"白细胞为什么觉得孤单？因为身边没有红细胞朋友。", note:"原创小冷笑话，顺便记住 white / red blood cell 的说法。" },
+  { type:"med", en:"Acute means sudden and short-lived; chronic means long-lasting.",
+    zh:"acute 急性（突发短暂），chronic 慢性（长期持续）。", note:"两个高频词描述的是病程，不是严重程度，别混淆。" },
+  { type:"prov", en:"Laughter is the best medicine.",
+    zh:"笑是最好的良药。", note:"安抚紧张患者时可轻松一提；medicine 在此指良药。" },
+  { type:"poem", en:"Listen first, then lay the hand—\nthe chart can wait, the fear cannot.\nA steady voice, a quiet stand,\nheals more than haste has ever bought.",
+    zh:"先倾听，再触诊——\n病历能等，恐惧不能。\n沉稳的嗓音，安静的守候，\n比匆忙治愈得更多。", note:"原创小诗，写医患沟通的节奏；念出来练语调。" },
+  { type:"med", en:"Take the medication on an empty stomach, an hour before meals.",
+    zh:"空腹服药，饭前一小时。", note:"on an empty stomach 空腹，是固定搭配，记牢。" },
+  { type:"joke", en:"A patient asks, 'Will I play piano after surgery?' 'Of course.' 'Wonderful—I never could before!'",
+    zh:"患者问：'手术后我能弹钢琴吗？''当然。''太好了——我以前从来不会！'", note:"经典门诊幽默，顺手复习 be able to / will 的用法。" },
+  { type:"med", en:"When you miss a word, just say: 'Sorry, could you say that again, more slowly?'",
+    zh:"没听清时就说：'抱歉，您能再慢一点说一遍吗？'", note:"非母语医生最实用的救场句，练到脱口而出。这是专业，不是示弱。" },
+  { type:"prov", en:"First, do no harm.",
+    zh:"首先，不造成伤害。", note:"医学伦理的古老准则（源自希波克拉底传统），英文常被直接引用。" },
+  { type:"poem", en:"The night shift hums in fluorescent light;\na monitor keeps its patient beat.\nYou speak in words both plain and right,\nand fear, for now, gives up its seat.",
+    zh:"夜班在荧光灯下低鸣；\n监护仪守着它的节律。\n你用既朴素又恰当的话语，\n而恐惧，暂时让出了座位。", note:"原创小诗，朗读时感受英文长句的停顿与重音。" },
+  { type:"read", en:"Teach-back is simple but powerful. After you explain something, don't ask 'Do you understand?'—most patients will just nod. Instead, ask them to tell you, in their own words, what they will do at home. If they miss a point, you fill the gap kindly. This one habit catches misunderstandings before they cause harm, and it works in any language.",
+    zh:"回授法简单却有力。解释完后别问'您听懂了吗'——多数患者只会点头。换个问法：请他们用自己的话说说回家后要怎么做。若有遗漏，你再温和补上。这个习惯能在误解造成伤害前就发现它，而且在任何语言里都管用。", note:"阅读练习｜teach-back 的精髓，朗读一遍练长句节奏。" },
+  { type:"read", en:"Patients often expect antibiotics for every fever or cough. A kind, clear explanation works better than a flat refusal. You might say the illness looks viral, that antibiotics won't help it, and that they may even cause side effects. Promise to review things if they change. Most people accept this when they feel heard, not dismissed.",
+    zh:"患者常一发烧、一咳嗽就想要抗生素。比起硬性拒绝，温和清楚的解释更有效。你可以说这次看起来像病毒感染，抗生素帮不上忙，反而可能带来副作用，并承诺如情况变化会再评估。多数人在感到被倾听、而非被打发时，会接受这个说法。", note:"阅读练习｜抗菌药物合理使用的沟通，留意 won't / may even 的语气。" },
+  { type:"read", en:"She gripped the edge of the bed, eyes fixed on the floor. 'Whatever the results say,' he said gently, 'we will face it together, one step at a time.' He pulled a chair close and sat, so they were at the same height. The room was quiet. Sometimes the most healing thing a doctor can offer is simply to stay.",
+    zh:"她攥着床沿，目光盯着地板。'无论结果怎样，'他轻声说，'我们都会一起面对，一步一步来。'他拉过一把椅子坐下，与她平视。房间很安静。有时，医生能给的最具疗愈力的东西，只是留下来陪着。", note:"阅读练习｜共情场景叙述，体会简单英文也能很有力量。" },
+  { type:"read", en:"Good medicine begins long before the prescription. It begins when you say the patient's name correctly, when you sit instead of stand, when you let a silence breathe instead of rushing to fill it. Language is part of this care. You do not need perfect grammar to be understood; you need warmth, clarity, and the patience to check that your message landed. Every day you practice a few honest sentences, you are not only learning English—you are becoming the kind of doctor that frightened people trust. And that trust, in the end, is the real treatment.",
+    zh:"好的医疗，远在开药之前就开始了。它始于你正确叫出患者的名字，始于你选择坐下而非站着，始于你让沉默自然呼吸、而不急着填满。语言也是这份关怀的一部分。你不需要完美的语法才能被理解；你需要的是温度、清晰，以及确认对方真的听懂的耐心。每天你练上几句真诚的话，学到的就不只是英语——你正在成为那种让惶恐的人愿意信任的医生。而那份信任，归根结底，才是真正的治疗。", note:"阅读练习｜一段较长的反思，慢慢读，享受长句。" }
+];
+const TIP_BADGE = { prov:"谚语", med:"医学英语", joke:"趣谈", poem:"小诗", read:"阅读 · 长文" };
+
+function dayCount(){ return stats.totalDays + (completedToday()?0:1); }
+function renderTip(){
+  const t = TIPS[(dayCount()-1+TIPS.length) % TIPS.length];
+  const el = document.getElementById('tipCard');
+  el.className = 'tip-card type-'+t.type;
+  el.innerHTML =
+    '<div class="tc-head"><span class="tc-badge">每日 · '+TIP_BADGE[t.type]+'</span>'+
+      '<button class="tc-spk" title="朗读">'+spkIcon()+'</button></div>'+
+    '<div class="tc-en">'+escapeHtml(t.en).replace(/\n/g,'<br>')+'</div>'+
+    '<div class="tc-zh">'+escapeHtml(t.zh).replace(/\n/g,'<br>')+'</div>'+
+    (t.note ? '<div class="tc-note">'+escapeHtml(t.note)+'</div>' : '');
+  el.querySelector('.tc-spk').addEventListener('click',e=>speak(t.en.replace(/\n/g,' '),false,e.currentTarget));
+}
+
+/* =========================================================
+   情景对练（进阶版）：AI 扮演对手，可当医生或患者
+   ========================================================= */
+const SCENARIOS = [
+  { id:"fever", icon:"🌡️", zh:"发热待查", en:"Fever workup",
+    persona:"34岁，发热3天最高39℃，畏寒乏力、轻度头痛，无明显咳嗽，一周前从东南亚出差回来。" },
+  { id:"cough", icon:"🫁", zh:"咳嗽气短", en:"Cough & breathing",
+    persona:"58岁，咳嗽两周、近三天咳黄痰、活动后气短，吸烟20年。" },
+  { id:"diarrhea", icon:"🚽", zh:"急性腹泻", en:"Acute diarrhea",
+    persona:"27岁，腹泻一天约8次水样便、腹绞痛、低热，昨天聚餐吃过海鲜。" },
+  { id:"screen", icon:"🧭", zh:"感染筛查", en:"Infection screening",
+    persona:"41岁，低热伴肌肉酸痛，近期去过有疫情的地区，很担心被传染。" },
+  { id:"hepb", icon:"🩺", zh:"乙肝咨询", en:"Hepatitis B counseling",
+    persona:"36岁，体检发现乙肝表面抗原阳性、无症状，非常焦虑，怕传染家人。" },
+  { id:"isolation", icon:"🚧", zh:"隔离沟通", en:"Explaining isolation",
+    persona:"50岁，疑似呼吸道传染病需暂时隔离，对隔离感到害怕和抵触。" },
+  { id:"antibiotic", icon:"💊", zh:"抗生素咨询", en:"Antibiotic request",
+    persona:"30岁，普通感冒，坚持要求开抗生素，认为不开就好不了。" },
+  { id:"general", icon:"🩹", zh:"综合门诊", en:"General consult",
+    persona:"一位普通门诊患者，主诉常见温和，由你即兴展开。" }
+];
+
+const ANTHROPIC_MODEL = "claude-sonnet-4-20250514";
+async function callClaude(messages, system){
+  const res = await fetch("https://api.anthropic.com/v1/messages", {
+    method:"POST", headers:{ "Content-Type":"application/json" },
+    body: JSON.stringify({ model:ANTHROPIC_MODEL, max_tokens:1000, system, messages })
+  });
+  if(!res.ok) throw new Error("HTTP "+res.status);
+  const data = await res.json();
+  return (data.content||[]).filter(b=>b.type==="text").map(b=>b.text).join("\n").trim();
+}
+
+let scRole = "doctor";
+let convo = null;
+let typingEl = null;
+
+function renderScenario(){
+  if(convo && convo.active) return;            // 保留进行中的对话
+  const root = document.getElementById('scenarioRoot');
+  const d = todayDialogue();
+  root.innerHTML =
+    '<button class="script-card" id="scriptCard"><span class="ic">📖</span>'+
+      '<span class="meta"><span class="lab">今日情景剧本 · 可离线读/跟读</span>'+
+      '<span class="ti">'+escapeHtml(d.zh)+'</span></span>'+
+      '<span class="go">阅读 / 跟读 ›</span></button>'+
+    '<div class="sc-intro">下面是 <b>AI 实时对练</b>：可当医生或患者，AI 即兴回应；需联网、在 Claude 内运行。</div>'+
+    '<div class="role-toggle">'+
+      '<button data-r="doctor" class="'+(scRole==="doctor"?"on":"")+'">我当医生<span>AI 演患者</span></button>'+
+      '<button data-r="patient" class="'+(scRole==="patient"?"on":"")+'">我当患者<span>AI 演医生</span></button>'+
+    '</div><div class="sc-grid" id="scGrid"></div>'+
+    '<p class="foot-note">情景剧本离线可用；AI 实时对练由 AI 即兴生成，需在 Claude 应用 / 网页中联网运行。</p>';
+  root.querySelector('#scriptCard').addEventListener('click',()=>renderScript(d));
+  root.querySelectorAll('.role-toggle button').forEach(b=>
+    b.addEventListener('click',()=>{ scRole=b.dataset.r; renderScenario(); }));
+  const grid = root.querySelector('#scGrid');
+  SCENARIOS.forEach(s=>{
+    const c=document.createElement('button'); c.className="sc-card";
+    c.innerHTML='<span class="ic">'+s.icon+'</span><span class="t">'+escapeHtml(s.zh)+'</span>'+
+                '<span class="e">'+escapeHtml(s.en)+'</span>';
+    c.addEventListener('click',()=>startConvo(s));
+    grid.appendChild(c);
+  });
+}
+
+function systemPrompt(){
+  const s = convo.sc;
+  if(convo.role==="doctor"){
+    return "You are role-playing as a PATIENT in a medical consultation with a non-native-English-speaking doctor (the user) who is practicing clinical English. "+
+      "Patient background: "+s.persona+" "+
+      "Stay fully in character as this patient. Use natural, everyday spoken English a layperson would use, and avoid medical jargon. "+
+      "Keep every reply short: 1 to 3 sentences. Answer only what the doctor asks and reveal details gradually rather than all at once. Show realistic, mild worry. "+
+      "If the doctor's English is unclear, ask them to clarify simply, the way a real patient would. Never break character, never add meta commentary, and never write the doctor's lines.";
+  }
+  return "You are role-playing as a friendly ENGLISH-SPEAKING DOCTOR in a consultation. The user is a learner playing the PATIENT. "+
+    "The patient's situation: "+s.persona+" "+
+    "Stay in character as the doctor. Use clear, simple, natural English suitable for someone still learning the language. Ask ONE question at a time and guide the consultation step by step. "+
+    "Keep every reply short: 1 to 3 sentences. Be warm and encouraging. Never break character, never add meta commentary, and never write the patient's lines.";
+}
+
+function startConvo(s){
+  convo = { sc:s, role:scRole, api:[], active:true, busy:false };
+  const root = document.getElementById('scenarioRoot');
+  root.innerHTML =
+    '<div class="conv-head">'+
+      '<button class="conv-back" id="convBack">‹ 返回</button>'+
+      '<div class="conv-title">'+escapeHtml(s.zh)+' · '+(scRole==="doctor"?"你是医生":"你是患者")+'</div>'+
+      '<button class="conv-end" id="convEnd">结束并点评</button>'+
+    '</div>'+
+    (scRole==="patient" ? '<div class="persona"><b>你的角色：</b>'+escapeHtml(s.persona)+'</div>' : '')+
+    '<div class="chat-stream" id="chatStream"></div>'+
+    '<div class="chat-input">'+
+      '<textarea id="chatBox" rows="1" placeholder="'+(scRole==="doctor"?"用英文问诊…（回车发送）":"用英文回答医生…（回车发送）")+'"></textarea>'+
+      (SR?'<button class="ci-mic" id="ciMic" title="语音输入">🎤</button>':'')+
+      '<button class="ci-send" id="ciSend">发送</button>'+
+    '</div>';
+  document.getElementById('convBack').addEventListener('click',()=>{ convo.active=false; convo=null; renderScenario(); });
+  document.getElementById('convEnd').addEventListener('click',endConvo);
+  document.getElementById('ciSend').addEventListener('click',sendTurn);
+  const box=document.getElementById('chatBox');
+  box.addEventListener('keydown',e=>{ if(e.key==="Enter"&&!e.shiftKey){ e.preventDefault(); sendTurn(); }});
+  box.addEventListener('input',()=>{ box.style.height="auto"; box.style.height=Math.min(box.scrollHeight,120)+"px"; });
+  if(SR) document.getElementById('ciMic').addEventListener('click',convMic);
+  kickoff();
+}
+
+async function kickoff(){
+  addBubble('ai','',true);
+  convo.api = [{ role:"user", content: convo.role==="doctor"
+    ? "The consultation is about to begin. You are the patient. Greet the doctor briefly and say, in one or two sentences, why you came in today."
+    : "The consultation is about to begin. You are the doctor. Greet the patient warmly and ask your first opening question." }];
+  await aiRespond();
+}
+async function sendTurn(){
+  if(!convo || convo.busy) return;
+  const box=document.getElementById('chatBox');
+  const txt=box.value.trim(); if(!txt) return;
+  box.value=""; box.style.height="auto";
+  addBubble('me',txt,false);
+  convo.api.push({ role:"user", content:txt });
+  addBubble('ai','',true);
+  await aiRespond();
+}
+async function aiRespond(){
+  convo.busy=true;
+  try{
+    const reply = await callClaude(convo.api, systemPrompt());
+    replaceTyping(reply || "(没有回应)");
+    convo.api.push({ role:"assistant", content: reply });
+    speak(reply.replace(/\n/g,' '), false, null);
+  }catch(e){ replaceTyping(null, true); }
+  finally{ convo.busy=false; }
+}
+
+function addBubble(who, text, typing){
+  const stream=document.getElementById('chatStream');
+  const b=document.createElement('div');
+  if(typing){ b.className="bubble typing"; b.innerHTML='<span class="d"></span><span class="d"></span><span class="d"></span>'; typingEl=b; }
+  else{
+    b.className="bubble "+(who==="ai"?"ai":"me");
+    b.innerHTML='<div class="bx">'+escapeHtml(text).replace(/\n/g,'<br>')+'</div>'+
+      (who==="ai"?'<button class="bspk" title="朗读">'+spkIcon()+'</button>':'');
+    if(who==="ai") b.querySelector('.bspk').addEventListener('click',ev=>speak(text.replace(/\n/g,' '),false,ev.currentTarget));
+  }
+  stream.appendChild(b);
+  window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
+}
+function replaceTyping(text, err){
+  if(!typingEl) return;
+  if(err){
+    typingEl.className="bubble ai err";
+    typingEl.innerHTML='<div class="bx">连接失败。AI 回应需要在 Claude 应用 / 网页里联网运行；本地打开时此功能不可用，但「今日」「跟读」「贴士」仍可使用。</div>';
+  }else{
+    typingEl.className="bubble ai";
+    typingEl.innerHTML='<div class="bx">'+escapeHtml(text).replace(/\n/g,'<br>')+'</div>'+
+      '<button class="bspk" title="朗读">'+spkIcon()+'</button>';
+    typingEl.querySelector('.bspk').addEventListener('click',ev=>speak(text.replace(/\n/g,' '),false,ev.currentTarget));
+  }
+  typingEl=null;
+  window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
+}
+
+async function endConvo(){
+  if(!convo || convo.busy) return;
+  const learner = convo.api.filter((m,i)=> m.role==="user" && i>0).map(m=>m.content);
+  if(learner.length===0){ toast("先用英文和 AI 聊几句，再点评～"); return; }
+  convo.busy=true;
+  addBubble('ai','',true);
+  const sys="You are a warm, encouraging English coach for a non-native doctor. Reply in Simplified Chinese. "+
+    "Given the learner's English lines from a medical role-play, give brief, specific, kind feedback. "+
+    "Structure: start with one encouraging sentence; then a line 『可以更地道』followed by up to 3 improvements, each as 原句 → 更自然的说法; then one useful expression for this scenario. "+
+    "Be concise. Do not use Markdown headers or symbols like # or *.";
+  const payload=[{ role:"user", content:"Scenario: "+convo.sc.en+". The learner played the "+convo.role+". The learner's English lines:\n"+
+    learner.map((l,i)=>(i+1)+". "+l).join("\n") }];
+  try{
+    const fb=await callClaude(payload, sys);
+    if(typingEl){ typingEl.remove(); typingEl=null; }
+    const stream=document.getElementById('chatStream');
+    const card=document.createElement('div'); card.className="coach";
+    card.innerHTML='<div class="coach-h">📝 表达点评</div><div class="coach-b">'+escapeHtml(fb||"(暂无点评)").replace(/\n/g,'<br>')+'</div>';
+    stream.appendChild(card);
+    stats.scenarios=(stats.scenarios||0)+1;
+    stats.scenarioLog.push({ date:todayStr(), sc:convo.sc.zh, role:convo.role });
+    if(stats.scenarioLog.length>30) stats.scenarioLog=stats.scenarioLog.slice(-30);
+    const newly = await markDailyComplete();   // 情景对练也算当日打卡
+    await saveStats();
+    toast(newly ? "🔥 已打卡 + 完成情景对练！" : "已完成 1 次情景对练 👏");
+    window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
+  }catch(e){ replaceTyping(null, true); }
+  finally{ convo.busy=false; }
+}
+
+function convMic(){
+  const rec=new SR(); rec.lang="en-US"; rec.interimResults=false; rec.maxAlternatives=1;
+  const btn=document.getElementById('ciMic'); btn.classList.add('rec');
+  rec.onresult=ev=>{ const box=document.getElementById('chatBox');
+    box.value=(box.value?box.value+" ":"")+ev.results[0][0].transcript;
+    box.dispatchEvent(new Event('input')); };
+  rec.onend=()=>btn.classList.remove('rec');
+  rec.onerror=()=>btn.classList.remove('rec');
+  try{ rec.start(); }catch(e){ btn.classList.remove('rec'); }
+}
+
+/* =========================================================
+   离线情景剧本（可读 / 可跟读，无需联网）
+   ========================================================= */
+const DIALOGUES = [
+  { id:"fever", icon:"🌡️", zh:"发热待查", turns:[
+    {s:"D",en:"Good morning. I'm Dr. Lee. What brings you in today?",zh:"早上好，我是李医生。今天来看什么问题？"},
+    {s:"P",en:"Hi doctor. I've had a fever for three days, and I feel very tired.",zh:"你好医生。我发烧三天了，感觉很累。"},
+    {s:"D",en:"I'm sorry to hear that. How high has your temperature been?",zh:"很抱歉。您体温最高到多少？"},
+    {s:"P",en:"It reached thirty-nine degrees last night.",zh:"昨晚到了39度。"},
+    {s:"D",en:"Have you had any chills or night sweats?",zh:"有寒战或盗汗吗？"},
+    {s:"P",en:"Yes, I get cold shivers, especially in the evening.",zh:"有，会发冷打颤，尤其晚上。"},
+    {s:"D",en:"Any cough, sore throat, or pain anywhere?",zh:"有咳嗽、咽痛，或哪里疼吗？"},
+    {s:"P",en:"A mild headache, but no cough.",zh:"有点轻微头痛，但不咳嗽。"},
+    {s:"D",en:"Have you traveled anywhere recently?",zh:"您最近去过哪里旅行吗？"},
+    {s:"P",en:"I came back from Southeast Asia about a week ago.",zh:"大约一周前从东南亚回来。"},
+    {s:"D",en:"That's important. We'll run some blood tests to find the cause.",zh:"这很重要。我们会做血液检查找原因。"},
+    {s:"P",en:"Is it something serious?",zh:"严重吗？"},
+    {s:"D",en:"It's too early to say, but we'll look after you.",zh:"现在下结论太早，但我们会照顾好您。"}
+  ]},
+  { id:"cough", icon:"🫁", zh:"咳嗽气短", turns:[
+    {s:"D",en:"Hello, I'm Dr. Chen. How can I help you today?",zh:"你好，我是陈医生。今天有什么可以帮您？"},
+    {s:"P",en:"I've had a cough for about two weeks, and it's getting worse.",zh:"我咳嗽大约两周了，而且越来越重。"},
+    {s:"D",en:"Is your cough dry, or are you bringing up phlegm?",zh:"您是干咳，还是有痰？"},
+    {s:"P",en:"There's phlegm, and lately it's been yellow.",zh:"有痰，最近是黄色的。"},
+    {s:"D",en:"Are you short of breath, especially when you walk?",zh:"您会气短吗，尤其走路时？"},
+    {s:"P",en:"Yes, I get out of breath quite easily now.",zh:"是的，现在很容易喘。"},
+    {s:"D",en:"Do you smoke, or have you smoked in the past?",zh:"您吸烟吗，或以前吸过吗？"},
+    {s:"P",en:"I've smoked for about twenty years.",zh:"我吸烟大概二十年了。"},
+    {s:"D",en:"Thank you for telling me. Any fever or chest pain?",zh:"谢谢您告诉我。有发烧或胸痛吗？"},
+    {s:"P",en:"A mild fever yesterday, and some pain when I breathe deeply.",zh:"昨天有点低烧，深呼吸时有些痛。"},
+    {s:"D",en:"I'd like to listen to your chest and arrange a chest X-ray.",zh:"我想听一下您的胸部，并安排一个胸片。"},
+    {s:"P",en:"All right. Is it serious, doctor?",zh:"好的。严重吗，医生？"},
+    {s:"D",en:"Let's find out together. The X-ray will tell us a lot.",zh:"我们一起弄清楚，胸片能告诉我们很多。"}
+  ]},
+  { id:"diarrhea", icon:"🚽", zh:"急性腹泻", turns:[
+    {s:"D",en:"Good afternoon. What seems to be the problem today?",zh:"下午好。今天哪里不舒服？"},
+    {s:"P",en:"I've had really bad diarrhea since yesterday.",zh:"我从昨天开始腹泻很厉害。"},
+    {s:"D",en:"How many times a day are you passing stools?",zh:"您一天排便几次？"},
+    {s:"P",en:"Maybe eight times. It's very watery.",zh:"大概八次，都是水样的。"},
+    {s:"D",en:"Is there any blood in it?",zh:"里面有血吗？"},
+    {s:"P",en:"No blood, but I have stomach cramps.",zh:"没有血，但我肚子绞痛。"},
+    {s:"D",en:"Are you able to keep fluids down?",zh:"您喝水能喝得进、不吐吗？"},
+    {s:"P",en:"A little. I feel dizzy when I stand up.",zh:"喝一点点。站起来会头晕。"},
+    {s:"D",en:"Have you eaten anything unusual recently?",zh:"最近吃过什么不寻常的东西吗？"},
+    {s:"P",en:"I had seafood at a dinner the night before.",zh:"前天晚上聚餐吃了海鲜。"},
+    {s:"D",en:"That's helpful. We'll give you fluids and check a stool sample.",zh:"这很有帮助。我们会给您补液，并查大便样本。"},
+    {s:"P",en:"Thank you. I feel very weak.",zh:"谢谢。我觉得很虚弱。"},
+    {s:"D",en:"We'll take good care of you. Try to sip water often.",zh:"我们会照顾好您。试着经常小口喝水。"}
+  ]},
+  { id:"screen", icon:"🧭", zh:"感染筛查", turns:[
+    {s:"D",en:"Hello. I understand you're worried about an infection?",zh:"你好。我了解到您担心被传染？"},
+    {s:"P",en:"Yes. I have a low fever and my muscles ache.",zh:"是的。我有点低烧，肌肉酸痛。"},
+    {s:"D",en:"When did the symptoms start?",zh:"症状什么时候开始的？"},
+    {s:"P",en:"About three days ago, after I came back from a trip.",zh:"大约三天前，从旅行回来之后。"},
+    {s:"D",en:"Where did you travel, and when exactly did you return?",zh:"您去了哪里，具体哪天回来的？"},
+    {s:"P",en:"I returned last Monday from a region with an outbreak.",zh:"上周一从一个有疫情的地区回来。"},
+    {s:"D",en:"Have you been in contact with anyone who was unwell?",zh:"您接触过身体不适的人吗？"},
+    {s:"P",en:"One colleague on the trip had a fever too.",zh:"旅途中有位同事也发烧了。"},
+    {s:"D",en:"Thank you. To be safe, we'll take precautions and run tests.",zh:"谢谢。为安全起见，我们会采取预防措施并做检查。"},
+    {s:"P",en:"Should I be very worried?",zh:"我该非常担心吗？"},
+    {s:"D",en:"Most cases turn out fine. Let's get the facts first.",zh:"大多数情况结果都没事。我们先把情况查清楚。"},
+    {s:"P",en:"Okay, that makes me feel better.",zh:"好的，这让我安心一些。"}
+  ]},
+  { id:"hepb", icon:"🩺", zh:"乙肝咨询", turns:[
+    {s:"D",en:"Hello. You came about your hepatitis B result, is that right?",zh:"你好。您是为乙肝检查结果来的，对吗？"},
+    {s:"P",en:"Yes. The report says I'm positive. I'm very scared.",zh:"是的。报告说我是阳性，我很害怕。"},
+    {s:"D",en:"I understand. Let me explain what this means in simple terms.",zh:"我理解。我用简单的话给您解释一下。"},
+    {s:"P",en:"Please. Does this mean I'm seriously ill?",zh:"请讲。这是不是说我病得很重？"},
+    {s:"D",en:"Not necessarily. Many people carry the virus and feel completely well.",zh:"不一定。很多人携带病毒却完全没有症状。"},
+    {s:"P",en:"Can I give it to my family?",zh:"我会传给家人吗？"},
+    {s:"D",en:"It spreads through blood and certain contact, not by sharing meals.",zh:"它通过血液和某些接触传播，不会因为一起吃饭传染。"},
+    {s:"P",en:"That's a relief. What happens next?",zh:"这让我松了口气。接下来怎么办？"},
+    {s:"D",en:"We'll do more tests, and with treatment we can keep it under control.",zh:"我们会再做几项检查，通过治疗可以把它控制住。"},
+    {s:"P",en:"So I can live a normal life?",zh:"那我能正常生活吗？"},
+    {s:"D",en:"Yes, with regular check-ups, most people do very well.",zh:"是的，定期复查，大多数人都过得很好。"},
+    {s:"P",en:"Thank you, doctor. I feel calmer now.",zh:"谢谢您，医生。我现在平静多了。"}
+  ]},
+  { id:"isolation", icon:"🚧", zh:"隔离沟通", turns:[
+    {s:"D",en:"Hello. I need to talk with you about your care.",zh:"你好。我需要和您谈谈接下来的安排。"},
+    {s:"P",en:"Is something wrong? Why is everyone wearing masks?",zh:"出什么事了吗？为什么大家都戴口罩？"},
+    {s:"D",en:"For everyone's safety, we'll need to keep you isolated for now.",zh:"为了大家的安全，目前需要让您单独隔离。"},
+    {s:"P",en:"Isolated? That sounds frightening.",zh:"隔离？听起来很可怕。"},
+    {s:"D",en:"I understand. It's a precaution to protect you and others.",zh:"我理解。这是为保护您和他人的预防措施。"},
+    {s:"P",en:"How long will it last?",zh:"要持续多久？"},
+    {s:"D",en:"It's temporary, just until we have your test results.",zh:"是暂时的，等检查结果出来就好。"},
+    {s:"P",en:"Can my family still visit me?",zh:"我家人还能来看我吗？"},
+    {s:"D",en:"We'll make sure they know how to visit safely.",zh:"我们会确保他们知道如何安全探视。"},
+    {s:"P",en:"All right. I trust you.",zh:"好吧。我相信您。"},
+    {s:"D",en:"Thank you. We'll check on you often. You're not alone.",zh:"谢谢。我们会经常来看您。您不是一个人。"}
+  ]},
+  { id:"antibiotic", icon:"💊", zh:"抗生素咨询", turns:[
+    {s:"D",en:"Hello. How can I help you today?",zh:"你好。今天有什么可以帮您？"},
+    {s:"P",en:"I have a cold, and I want some antibiotics.",zh:"我感冒了，想开点抗生素。"},
+    {s:"D",en:"I see. Let me ask a few questions first. How long have you been sick?",zh:"好的。我先问几个问题。您病了多久？"},
+    {s:"P",en:"About three days. Runny nose and a sore throat.",zh:"大约三天。流鼻涕、嗓子痛。"},
+    {s:"D",en:"It looks like a viral infection. Antibiotics won't help with that.",zh:"这看起来像病毒感染，抗生素帮不上忙。"},
+    {s:"P",en:"But I really want to get better quickly.",zh:"可我真的想快点好。"},
+    {s:"D",en:"I understand. Antibiotics may even cause side effects, like diarrhea.",zh:"我理解。抗生素甚至可能带来副作用，比如腹泻。"},
+    {s:"P",en:"So what should I do?",zh:"那我该怎么办？"},
+    {s:"D",en:"Rest, drink fluids, and your body will clear it in a few days.",zh:"多休息、多喝水，几天后身体会自己清除它。"},
+    {s:"P",en:"And if it gets worse?",zh:"如果加重了呢？"},
+    {s:"D",en:"Then come back, and we'll review it. I'll look after you.",zh:"那就回来，我们再评估。我会照顾好您。"},
+    {s:"P",en:"Okay, thank you for explaining.",zh:"好的，谢谢您的解释。"}
+  ]},
+  { id:"general", icon:"🩹", zh:"综合门诊", turns:[
+    {s:"D",en:"Good morning. What brings you in today?",zh:"早上好。今天来看什么问题？"},
+    {s:"P",en:"I've been feeling tired and a bit dizzy lately.",zh:"我最近感觉疲倦，还有点头晕。"},
+    {s:"D",en:"How long has this been going on?",zh:"这种情况多久了？"},
+    {s:"P",en:"For about two weeks now.",zh:"大约两周了。"},
+    {s:"D",en:"Have you noticed any other changes, like sleep or appetite?",zh:"有没有注意到其它变化，比如睡眠或食欲？"},
+    {s:"P",en:"I haven't been sleeping well.",zh:"我睡得不太好。"},
+    {s:"D",en:"Are you under a lot of stress at the moment?",zh:"您最近压力很大吗？"},
+    {s:"P",en:"Yes, work has been very busy.",zh:"是的，工作一直很忙。"},
+    {s:"D",en:"That can affect how you feel. Let's check a few things.",zh:"这确实会影响您的感觉。我们来查几项。"},
+    {s:"P",en:"Do you think it's serious?",zh:"您觉得严重吗？"},
+    {s:"D",en:"Probably not, but it's good that you came in. We'll make sure.",zh:"大概不严重，但您来看是对的，我们会确认清楚。"},
+    {s:"P",en:"Thank you, doctor.",zh:"谢谢您，医生。"}
+  ]}
+];
+function todayDialogue(){ return DIALOGUES[(dayCount()-1+DIALOGUES.length)%DIALOGUES.length]; }
+
+let scrPlaying = false;
+function playScript(d, btn){
+  if(scrPlaying){ speechSynthesis.cancel(); scrPlaying=false; btn.textContent="▶ 连续朗读全段"; btn.classList.remove('stop'); return; }
+  if(!('speechSynthesis' in window)){ toast("此浏览器不支持语音朗读"); return; }
+  scrPlaying=true; btn.textContent="⏹ 停止朗读"; btn.classList.add('stop');
+  let i=0;
+  function step(){
+    if(!scrPlaying || i>=d.turns.length){ scrPlaying=false; btn.textContent="▶ 连续朗读全段"; btn.classList.remove('stop'); return; }
+    const u=new SpeechSynthesisUtterance(d.turns[i].en);
+    u.lang = enVoice?enVoice.lang:'en-US'; if(enVoice)u.voice=enVoice; u.rate=0.9;
+    u.onend=()=>{ i++; step(); }; u.onerror=()=>{ i++; step(); };
+    speechSynthesis.speak(u);
+  }
+  speechSynthesis.cancel(); step();
+}
+function renderScript(d){
+  scrPlaying=false; speechSynthesis.cancel();
+  const root=document.getElementById('scenarioRoot');
+  root.innerHTML=
+    '<div class="scr-head"><button class="conv-back" id="scrBack">‹ 返回</button>'+
+      '<div class="conv-title">'+escapeHtml(d.zh)+' · 情景剧本（医=医生，患=患者）</div><span style="width:44px"></span></div>'+
+    '<button class="playall" id="scrPlay">▶ 连续朗读全段</button>'+
+    '<div id="scrBody"></div>';
+  const body=root.querySelector('#scrBody');
+  d.turns.forEach(t=>{
+    const row=document.createElement('div'); row.className="scr-line "+(t.s==="D"?"d":"p");
+    row.innerHTML='<span class="who">'+(t.s==="D"?"医":"患")+'</span>'+
+      '<div class="lc"><div class="en">'+escapeHtml(t.en)+'</div><div class="zh">'+escapeHtml(t.zh)+'</div></div>'+
+      '<button class="ls" title="朗读">'+spkIcon()+'</button>';
+    row.querySelector('.ls').addEventListener('click',e=>speak(t.en,false,e.currentTarget));
+    body.appendChild(row);
+  });
+  root.querySelector('#scrBack').addEventListener('click',()=>renderScenario());
+  root.querySelector('#scrPlay').addEventListener('click',e=>playScript(d,e.currentTarget));
+}
+
+/* =========================================================
+   每日医学知识：生理 / 药学 / 解剖（每日一更新）
+   ========================================================= */
+const KNOW = [
+  { disc:"phys", term:"Glomerular filtration rate (GFR)", zh:"肾小球滤过率", en:"GFR estimates how well the kidneys filter blood; it falls as kidney function declines.", note:"评估肾功能的核心指标，读 /ˌdʒiː ef ˈɑːr/；肾功能下降时 GFR 降低。" },
+  { disc:"pharm", term:"Half-life (t½)", zh:"半衰期", en:"Half-life is the time for a drug's concentration to fall by half; it guides dosing intervals.", note:"约经 4–5 个半衰期达稳态血药浓度。" },
+  { disc:"anat", term:"Couinaud liver segments", zh:"Couinaud 肝段", en:"The liver is divided into eight functional segments, each with its own blood supply and drainage.", note:"与你的专业相关；Couinaud 读 /kwiːˈnoʊ/，segment 段。" },
+  { disc:"phys", term:"First-pass metabolism", zh:"首过代谢", en:"Oral drugs pass through the liver first, which can reduce how much reaches the bloodstream.", note:"肝脏首过效应影响口服药的 bioavailability（生物利用度）。" },
+  { disc:"pharm", term:"Cytochrome P450 enzymes", zh:"细胞色素 P450 酶", en:"These liver enzymes break down many drugs; inhibitors or inducers can change drug levels.", note:"肝酶诱导/抑制是药物相互作用的常见机制。" },
+  { disc:"anat", term:"Right upper quadrant (RUQ)", zh:"右上腹", en:"The liver and gallbladder sit in the right upper quadrant of the abdomen.", note:"腹部查体常用四象限：RUQ / LUQ / RLQ / LLQ。" },
+  { disc:"phys", term:"The Frank–Starling mechanism", zh:"Frank–Starling 机制", en:"Within limits, the more the heart fills and stretches, the harder it contracts.", note:"前负荷增加→心肌收缩力增强，解释心输出量的自我调节。" },
+  { disc:"pharm", term:"Narrow therapeutic index", zh:"治疗窗窄", en:"Some drugs have a small gap between a helpful dose and a toxic one, so blood levels are monitored.", note:"如华法林、地高辛；therapeutic /ˌθerəˈpjuːtɪk/。" },
+  { disc:"anat", term:"The portal triad", zh:"门管三联", en:"Each portal triad contains a hepatic artery branch, a portal vein branch, and a bile duct.", note:"肝小叶组织学的核心结构。" },
+  { disc:"phys", term:"The renin–angiotensin–aldosterone system", zh:"肾素-血管紧张素-醛固酮系统 (RAAS)", en:"RAAS raises blood pressure by retaining salt and water and tightening blood vessels.", note:"ACEI / ARB 类降压药的作用靶点。" },
+  { disc:"pharm", term:"Hepatotoxicity", zh:"肝毒性", en:"Some medications can injure the liver, so we check liver tests during treatment.", note:"hepatotoxicity /ˌhepətəʊtɒksˈɪsɪti/，与你的专业高度相关。" },
+  { disc:"anat", term:"The diaphragm", zh:"膈肌", en:"The diaphragm is the main muscle of breathing, separating the chest from the abdomen.", note:"diaphragm /ˈdaɪəfræm/，gh 不发音。" },
+  { disc:"phys", term:"Oxygen–hemoglobin dissociation curve", zh:"氧合血红蛋白解离曲线", en:"Fever and acidosis shift the curve right, so hemoglobin releases oxygen more easily to tissues.", note:"右移→组织更易获氧；与发热、酸中毒相关。" },
+  { disc:"pharm", term:"Broad- vs narrow-spectrum antibiotics", zh:"广谱与窄谱抗生素", en:"Narrow-spectrum drugs target fewer types of bacteria, which helps limit resistance.", note:"抗菌药物管理原则：能窄谱就不用广谱。" },
+  { disc:"anat", term:"The bronchial tree", zh:"支气管树", en:"Air travels from the trachea into bronchi, then smaller bronchioles, ending in alveoli.", note:"alveoli /ælˈviːəlaɪ/ 肺泡；trachea 气管。" },
+  { disc:"phys", term:"The hepatic portal system", zh:"肝门静脉系统", en:"Blood from the gut drains into the liver before reaching the rest of the body.", note:"门脉高压、食管静脉曲张的解剖生理基础。" },
+  { disc:"pharm", term:"Renal dose adjustment", zh:"按肾功能调整剂量", en:"Drugs cleared by the kidneys may need a lower dose when kidney function is reduced.", note:"clearance 清除率；肾功能差时减量或延长间隔。" },
+  { disc:"anat", term:"The gastrointestinal tract", zh:"胃肠道", en:"Food passes from the stomach to the duodenum, jejunum, ileum, and then the colon.", note:"小肠三段：十二指肠 / 空肠 / 回肠。" },
+  { disc:"phys", term:"Baroreceptor reflex", zh:"压力感受器反射", en:"When blood pressure drops, the heart speeds up to keep blood flowing to the brain.", note:"解释体位性低血压时的心率代偿。" },
+  { disc:"pharm", term:"Loading dose", zh:"负荷剂量", en:"A larger first dose can reach an effective level quickly, before regular maintenance doses continue.", note:"急需起效时使用，随后给维持剂量。" },
+  { disc:"anat", term:"Lymph nodes", zh:"淋巴结", en:"Lymph nodes filter lymph and often swell when the body fights a nearby infection.", note:"感染时淋巴结肿大；node /nəʊd/。" }
+];
+const DISC = { phys:{lab:"生理学", cls:"disc-phys"}, pharm:{lab:"药学", cls:"disc-pharm"}, anat:{lab:"解剖学", cls:"disc-anat"} };
+let knowBrowse = null;
+function renderKnowledge(){
+  const root=document.getElementById('knowledgeRoot');
+  const todayIdx=(dayCount()-1+KNOW.length)%KNOW.length;
+  const idx = (knowBrowse==null)?todayIdx:knowBrowse;
+  const k=KNOW[idx], meta=DISC[k.disc];
+  root.innerHTML=
+    '<div class="sc-intro">每天一条临床知识，轮换<b>生理 · 药学 · 解剖</b>，配实用英文表达。'+
+      (knowBrowse==null?'':'<span style="color:var(--coral)"> · 浏览中</span>')+'</div>'+
+    '<div class="know-card">'+
+      '<span class="disc-badge '+meta.cls+'">'+(knowBrowse==null?"今日 · ":"")+meta.lab+'</span>'+
+      '<div class="know-term">'+escapeHtml(k.term)+'</div>'+
+      '<div class="know-zh-term">'+escapeHtml(k.zh)+'</div>'+
+      '<div class="know-en">'+escapeHtml(k.en)+'</div>'+
+      (k.note?'<div class="know-note">'+escapeHtml(k.note)+'</div>':'')+
+      '<div class="know-actions">'+
+        '<button class="audiobtn primary" id="kPlay">'+spkIcon()+'朗读</button>'+
+        '<button class="audiobtn" id="kSlow">慢速</button></div>'+
+    '</div>'+
+    '<button class="cta ghost know-more" id="kMore">再学一条 →</button>'+
+    (knowBrowse!=null?'<button class="cta ghost" id="kBack" style="margin-top:-14px;">回到今日</button>':'');
+  root.querySelector('#kPlay').addEventListener('click',e=>speak(k.en,false,e.currentTarget));
+  root.querySelector('#kSlow').addEventListener('click',e=>speak(k.en,true,e.currentTarget));
+  root.querySelector('#kMore').addEventListener('click',()=>{ knowBrowse=(idx+1)%KNOW.length; renderKnowledge(); });
+  const kb=root.querySelector('#kBack'); if(kb) kb.addEventListener('click',()=>{ knowBrowse=null; renderKnowledge(); });
+}
+
+/* =========================================================
+   导航 + 工具
+   ========================================================= */
+function switchView(v){
+  ['today','practice','progress','scenario','knowledge'].forEach(name=>{
+    document.getElementById('view-'+name).classList.toggle('hidden', name!==v);
+  });
+  document.querySelectorAll('nav button').forEach(b=>{
+    b.setAttribute('aria-selected', b.dataset.view===v ? 'true':'false');
+  });
+  if(v==='progress') renderProgress();
+  if(v==='today'){ renderToday(); renderTip(); }
+  if(v==='scenario') renderScenario();
+  if(v==='knowledge') renderKnowledge();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function updateStreakBadge(){ document.getElementById('streakNum').textContent = stats.streak; }
+let toastTimer;
+function toast(msg){
+  const el = document.getElementById('toast'); el.textContent = msg; el.classList.add('show');
+  clearTimeout(toastTimer); toastTimer = setTimeout(()=>el.classList.remove('show'), 2600);
+}
+function escapeHtml(s){ return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+/* =========================================================
+   启动
+   ========================================================= */
+async function init(){
+  await loadStats();
+  // 跨天断签：若上次完成不是昨天也不是今天，连续天数将在下次打卡时重置（这里仅显示当前值）
+  document.getElementById('boot').classList.add('hidden');
+  document.getElementById('app').classList.remove('hidden');
+  updateStreakBadge();
+  renderToday();
+  renderTip();
+  document.querySelectorAll('nav button').forEach(b=>{
+    b.addEventListener('click',()=>switchView(b.dataset.view));
+  });
+  document.getElementById('goPractice').addEventListener('click',startPractice);
+  document.getElementById('resetBtn').addEventListener('click',async()=>{
+    if(confirm("确定清空所有学习记录吗？此操作无法撤销。")){
+      stats = { startDate:todayStr(), lastCompletedDate:null, streak:0, totalDays:0, phrases:0, scenarios:0, history:[], scenarioLog:[] };
+      await saveStats(); updateStreakBadge(); renderProgress(); renderToday();
+      toast("记录已清空");
+    }
+  });
+}
+init();
+</script>
+</body>
+</html>
